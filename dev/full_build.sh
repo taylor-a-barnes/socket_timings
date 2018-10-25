@@ -1,3 +1,6 @@
+module load intel/2017u4
+module load intel-mpi/2017u4
+
 cd ../lib/
 rm -rf mdi_build
 mkdir mdi_build

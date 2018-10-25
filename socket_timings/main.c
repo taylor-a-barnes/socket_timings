@@ -5,15 +5,21 @@ void mpi_ping_pong(int my_rank) {
   if(my_rank == 0) {
     char message[4] = "ping";
 
-    MPI_Send(message, 4, MPI_CHAR, 1, 0, MPI_COMM_WORLD);
+    //printf("Head rank send %s\n",message);
 
-    printf("Head rank %s\n",message);
+    MPI_Send(message, 4, MPI_CHAR, 1, 0, MPI_COMM_WORLD);
+    MPI_Recv(message, 4, MPI_CHAR, 1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+
+    //printf("Head rank recv %s\n",message);
+
   }
   if(my_rank == 1) {
+    char rmessag[4];
     char message[4] = "pong";
-    MPI_Recv(message, 4, MPI_CHAR, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
-    printf("Received %s\n",message);
+    MPI_Recv(rmessag, 4, MPI_CHAR, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+    MPI_Send(message, 4, MPI_CHAR, 0, 0, MPI_COMM_WORLD);
+
   }
 }
 
@@ -38,7 +44,15 @@ int main() {
   printf("Hello world from processor %s, rank %d out of %d processors\n",
 	 processor_name, world_rank, world_size);
 
-  mpi_ping_pong(world_rank);
+
+  int i;
+  for (i=0; i<100; i++) {
+    mpi_ping_pong(world_rank);
+
+    if(world_rank == 0) {
+      printf("MPI Iteration: %i\n",i);
+    }
+  }
 
   // Finalize the MPI environment.
   MPI_Finalize();

@@ -1,1 +1,1 @@
-mpirun -n 4 ../../build/main
+mpirun -n 2 ../../build/main

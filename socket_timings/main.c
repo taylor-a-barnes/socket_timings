@@ -51,7 +51,7 @@ int main() {
   start = clock();
 
   int i;
-  for (i=0; i<1000000; i++) {
+  for (i=0; i<100000; i++) {
     mpi_ping_pong(world_rank);
 
     //if(world_rank == 0) {

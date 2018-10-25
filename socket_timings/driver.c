@@ -14,6 +14,7 @@ void mdi_ping_pong(int comm) {
 int main() {
   clock_t start, end;
   double cpu_time;
+  int niter = 100000;
 
   // Initialize the MDI driver
   int socket = MDI_Init(8021);
@@ -24,7 +25,7 @@ int main() {
   start = clock();
 
   int i;
-  for (i=0; i<1000000; i++) {
+  for (i=0; i<niter; i++) {
     mdi_ping_pong(comm);
     if (i%1000 == 0) {
       printf("Iteration: %i\n",i);
@@ -34,6 +35,7 @@ int main() {
   end = clock();
   cpu_time = ((double) (end - start)) / CLOCKS_PER_SEC;
   printf("Ping-pong time: %f\n",cpu_time);
+  printf("   us: %f\n",1000000.0*cpu_time/((double) (2*niter)));
 
   MDI_Send_Command("EXIT",comm);
   

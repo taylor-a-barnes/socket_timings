@@ -31,6 +31,8 @@ int main() {
   end = clock();
   cpu_time = ((double) (end - start)) / CLOCKS_PER_SEC;
   printf("Ping-pong time: %f\n",cpu_time);
+
+  MDI_Send_Command("EXIT",comm);
   
   return 0;
 }

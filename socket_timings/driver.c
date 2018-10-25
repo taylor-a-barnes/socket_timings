@@ -8,7 +8,7 @@ void mdi_ping_pong(int comm) {
   MDI_Send_Command("<NAME",comm);
   MDI_Recv(message, MDI_NAME_LENGTH, MDI_CHAR, comm);
 
-  printf("NAME: %s\n",message);
+  //printf("NAME: %s\n",message);
 }
 
 int main() {
@@ -24,8 +24,11 @@ int main() {
   start = clock();
 
   int i;
-  for (i=0; i<100; i++) {
+  for (i=0; i<1000000; i++) {
     mdi_ping_pong(comm);
+    if (i%1000 == 0) {
+      printf("Iteration: %i\n",i);
+    }
   }
 
   end = clock();

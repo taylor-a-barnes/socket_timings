@@ -4,22 +4,22 @@
 
 void mpi_ping_pong(int my_rank) {
   if(my_rank == 0) {
-    char message[4] = "ping";
+    char message[12] = "ping        ";
 
     //printf("Head rank send %s\n",message);
 
-    MPI_Send(message, 4, MPI_CHAR, 1, 0, MPI_COMM_WORLD);
-    MPI_Recv(message, 4, MPI_CHAR, 1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+    MPI_Send(message, 12, MPI_CHAR, 1, 0, MPI_COMM_WORLD);
+    MPI_Recv(message, 12, MPI_CHAR, 1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
     //printf("Head rank recv %s\n",message);
 
   }
   if(my_rank == 1) {
-    char rmessag[4];
-    char message[4] = "pong";
+    char rmessag[12];
+    char message[12] = "pong        ";
 
-    MPI_Recv(rmessag, 4, MPI_CHAR, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-    MPI_Send(message, 4, MPI_CHAR, 0, 0, MPI_COMM_WORLD);
+    MPI_Recv(rmessag, 12, MPI_CHAR, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+    MPI_Send(message, 12, MPI_CHAR, 0, 0, MPI_COMM_WORLD);
 
   }
 }

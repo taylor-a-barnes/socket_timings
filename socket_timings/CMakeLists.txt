@@ -11,6 +11,15 @@ add_executable(main
            main.c)
 target_link_libraries(main ${MPI_LIBRARIES})
 
+add_executable(driver
+           driver.c)
+#include_directories("${CMAKE_SOURCE_DIR}/../lib/mdi_build/molssi_driver_interface/")
+#link_directories("${CMAKE_SOURCE_DIR}/../lib/mdi_build/molssi_driver_interface/")
+target_link_libraries(driver ${CMAKE_SOURCE_DIR}/../lib/mdi_build/molssi_driver_interface/libmdi.a)
+
+#find_library(LIB_LOCATION NAMES libmdi.a mdi)
+#target_link_libraries(driver ${LIB_LOCATION})
+
 if(MPI_COMPILE_FLAGS)
   set_target_properties(main PROPERTIES
     COMPILE_FLAGS "${MPI_COMPILE_FLAGS}")

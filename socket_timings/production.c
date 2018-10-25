@@ -16,7 +16,7 @@ int main() {
     MDI_Recv_Command(command, comm);
 
     if( strcmp(command, "<NAME       ") == 0 ) {
-      MDI_Send("PONG        ", MDI_NAME_LENGTH, MDI_CHAR, comm);
+      MDI_Send("PONG       \0", MDI_NAME_LENGTH, MDI_CHAR, comm);
     }
   }
 

@@ -1,5 +1,6 @@
 #include <mpi.h>
 #include <stdio.h>
+#include <time.h>
 
 void mpi_ping_pong(int my_rank) {
   if(my_rank == 0) {
@@ -24,6 +25,9 @@ void mpi_ping_pong(int my_rank) {
 }
 
 int main() {
+  clock_t start, end;
+  double cpu_time;
+
   // Initialize the MPI environment
   MPI_Init(NULL, NULL);
 
@@ -44,15 +48,21 @@ int main() {
   printf("Hello world from processor %s, rank %d out of %d processors\n",
 	 processor_name, world_rank, world_size);
 
+  start = clock();
 
   int i;
-  for (i=0; i<100; i++) {
+  for (i=0; i<1000000; i++) {
     mpi_ping_pong(world_rank);
 
-    if(world_rank == 0) {
-      printf("MPI Iteration: %i\n",i);
-    }
+    //if(world_rank == 0) {
+    //  printf("MPI Iteration: %i\n",i);
+    //}
   }
+
+  end = clock();
+  cpu_time = ((double) (end - start)) / CLOCKS_PER_SEC;
+  printf("Ping-pong time: %i %f\n",world_rank,cpu_time);
+  
 
   // Finalize the MPI environment.
   MPI_Finalize();

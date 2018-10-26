@@ -39,3 +39,18 @@ target_link_libraries(driver ${CMAKE_SOURCE_DIR}/../lib/mdi_build/molssi_driver_
 add_executable(production
            production.c)
 target_link_libraries(production ${CMAKE_SOURCE_DIR}/../lib/mdi_build/molssi_driver_interface/libmdi.a)
+
+
+
+
+
+add_executable(zmq_server
+           zmq_server.c)
+target_link_libraries(zmq_server ${CMAKE_SOURCE_DIR}/../lib/zmq_build/lib/libzmq.so.5)
+
+
+
+
+add_executable(zmq_client
+           zmq_client.c)
+target_link_libraries(zmq_client ${CMAKE_SOURCE_DIR}/../lib/zmq_build/lib/libzmq.so.5)

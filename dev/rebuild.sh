@@ -10,13 +10,6 @@ make
 cp ../mdi/molssi_driver_interface/mdi.h molssi_driver_interface
 cd ../
 
-rm -rf zmq_build
-mkdir zmq_build
-cd zmq_build
-cmake ../libzmq
-make -j 4
-cd ../
-
 cd ../
 rm -rf build
 mkdir build

@@ -26,19 +26,72 @@ endif()
 
 add_executable(driver
            driver.c)
-#include_directories("${CMAKE_SOURCE_DIR}/../lib/mdi_build/molssi_driver_interface/")
-#link_directories("${CMAKE_SOURCE_DIR}/../lib/mdi_build/molssi_driver_interface/")
-target_link_libraries(driver ${CMAKE_SOURCE_DIR}/../lib/mdi_build/molssi_driver_interface/libmdi.a)
+target_link_libraries(driver ${CMAKE_SOURCE_DIR}/../lib/mdi_build/molssi_driver_interface/libmdi.a
+                                 ${MPI_LIBRARIES})
 
-#find_library(LIB_LOCATION NAMES libmdi.a mdi)
-#target_link_libraries(driver ${LIB_LOCATION})
+if(MPI_COMPILE_FLAGS)
+  set_target_properties(driver PROPERTIES
+    COMPILE_FLAGS "${MPI_COMPILE_FLAGS}")
+endif()
+
+if(MPI_LINK_FLAGS)
+  set_target_properties(driver PROPERTIES
+    LINK_FLAGS "${MPI_LINK_FLAGS}")
+endif()
 
 
 
 
 add_executable(production
            production.c)
-target_link_libraries(production ${CMAKE_SOURCE_DIR}/../lib/mdi_build/molssi_driver_interface/libmdi.a)
+target_link_libraries(production ${CMAKE_SOURCE_DIR}/../lib/mdi_build/molssi_driver_interface/libmdi.a
+                                 ${MPI_LIBRARIES})
+
+if(MPI_COMPILE_FLAGS)
+  set_target_properties(production PROPERTIES
+    COMPILE_FLAGS "${MPI_COMPILE_FLAGS}")
+endif()
+
+if(MPI_LINK_FLAGS)
+  set_target_properties(production PROPERTIES
+    LINK_FLAGS "${MPI_LINK_FLAGS}")
+endif()
+
+
+
+
+add_executable(mpi_driver
+           mpi_driver.c)
+target_link_libraries(mpi_driver ${CMAKE_SOURCE_DIR}/../lib/mdi_build/molssi_driver_interface/libmdi.a
+                                 ${MPI_LIBRARIES})
+
+if(MPI_COMPILE_FLAGS)
+  set_target_properties(mpi_driver PROPERTIES
+    COMPILE_FLAGS "${MPI_COMPILE_FLAGS}")
+endif()
+
+if(MPI_LINK_FLAGS)
+  set_target_properties(mpi_driver PROPERTIES
+    LINK_FLAGS "${MPI_LINK_FLAGS}")
+endif()
+
+
+
+
+add_executable(mpi_production
+           mpi_production.c)
+target_link_libraries(mpi_production ${CMAKE_SOURCE_DIR}/../lib/mdi_build/molssi_driver_interface/libmdi.a
+                                     ${MPI_LIBRARIES})
+
+if(MPI_COMPILE_FLAGS)
+  set_target_properties(mpi_production PROPERTIES
+    COMPILE_FLAGS "${MPI_COMPILE_FLAGS}")
+endif()
+
+if(MPI_LINK_FLAGS)
+  set_target_properties(mpi_production PROPERTIES
+    LINK_FLAGS "${MPI_LINK_FLAGS}")
+endif()
 
 
 

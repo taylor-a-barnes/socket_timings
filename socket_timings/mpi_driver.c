@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <time.h>
+#include <mpi.h>
 #include "../lib/mdi_build/molssi_driver_interface/mdi.h"
 
 void mdi_ping_pong(int comm) {
@@ -16,8 +17,11 @@ int main() {
   double cpu_time;
   int niter = 100000;
 
+  // Initialize the MPI environment
+  MPI_Init(NULL, NULL);
+
   // Initialize the MDI driver
-  int ret = MDI_Init(8021);
+  int ret = MDI_Init_MPI();
 
   // Accept a connection from the production code
   int comm = MDI_Accept_Connection();
@@ -38,6 +42,6 @@ int main() {
   printf("   us: %f\n",1000000.0*cpu_time/((double) (2*niter)));
 
   MDI_Send_Command("EXIT",comm);
-  
+
   return 0;
 }

@@ -21,7 +21,8 @@ int main() {
   MPI_Init(NULL, NULL);
 
   // Initialize the MDI driver
-  int ret = MDI_Init_MPI();
+  //int ret = MDI_Init_MPI();
+  int ret = MDI_Listen("MPI", NULL, NULL);
 
   // Accept a connection from the production code
   int comm = MDI_Accept_Connection();

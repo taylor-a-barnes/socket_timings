@@ -17,7 +17,8 @@ int main() {
   int niter = 100000;
 
   // Initialize the MDI driver
-  int ret = MDI_Init(8021);
+  //int ret = MDI_Init(8021);
+  int ret = MDI_Listen("TCP","8021",NULL);
 
   // Accept a connection from the production code
   int comm = MDI_Accept_Connection();

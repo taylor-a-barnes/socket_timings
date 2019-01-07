@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 
 project(MDI
-        LANGUAGES C)
+        LANGUAGES C Fortran)
 
 find_package(MPI REQUIRED)
 
@@ -90,6 +90,25 @@ endif()
 
 if(MPI_LINK_FLAGS)
   set_target_properties(mpi_production PROPERTIES
+    LINK_FLAGS "${MPI_LINK_FLAGS}")
+endif()
+
+
+add_executable(mpi_driver_f90
+           mpi_driver_f90.f90)
+target_link_libraries(mpi_driver_f90 ${CMAKE_SOURCE_DIR}/../lib/mdi_build/molssi_driver_interface/libmdif90.a
+                                 ${MPI_LIBRARIES})
+target_include_directories(mpi_driver_f90 PUBLIC
+   ${CMAKE_SOURCE_DIR}/../lib/mdi_build/molssi_driver_interface/
+   ${MPI_INCLUDE_PATH} )
+
+if(MPI_COMPILE_FLAGS)
+  set_target_properties(mpi_driver_f90 PROPERTIES
+    COMPILE_FLAGS "${MPI_COMPILE_FLAGS}")
+endif()
+
+if(MPI_LINK_FLAGS)
+  set_target_properties(mpi_driver_f90 PROPERTIES
     LINK_FLAGS "${MPI_LINK_FLAGS}")
 endif()
 

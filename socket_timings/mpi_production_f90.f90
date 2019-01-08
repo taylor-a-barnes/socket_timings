@@ -9,8 +9,9 @@ IMPLICIT NONE
 
    INTEGER :: ierr
    INTEGER :: comm_world, comm
-   !CHARACTER(len=MDI_NAME_LENGTH) :: message
-   CHARACTER(len=12) :: message
+   CHARACTER(len=:), ALLOCATABLE :: message
+
+   ALLOCATE( character(MDI_NAME_LENGTH) :: message )
 
    ! Initialize the MPI environment
    call MPI_INIT(ierr)

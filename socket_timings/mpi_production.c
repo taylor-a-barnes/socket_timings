@@ -16,11 +16,17 @@ int main() {
   start = clock();
 
   char command[MDI_COMMAND_LENGTH];
-  while( strcmp(command, "EXIT        ") != 0 ) {
+  while ( 1 ) {
     MDI_Recv_Command(command, comm);
 
-    if( strcmp(command, "<NAME       ") == 0 ) {
-      MDI_Send("PONG       \0", MDI_NAME_LENGTH, MDI_CHAR, comm);
+    if( strcmp(command, "<NAME") == 0 ) {
+      MDI_Send("PONG", MDI_NAME_LENGTH, MDI_CHAR, comm);
+    }
+    else if ( strcmp(command, "EXIT") == 0 ) {
+      return 0;
+    }
+    else {
+      perror("Error in MDI_Production: MDI command not recognized");
     }
   }
 

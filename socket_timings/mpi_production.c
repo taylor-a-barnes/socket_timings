@@ -11,7 +11,8 @@ int main() {
   MPI_Init(NULL, NULL);
 
   // Initialize the MDI driver
-  int comm = MDI_Open(MDI_MPI, 0, "MM");
+  //int comm = MDI_Open(MDI_MPI, 0, "MM");
+  int comm = MDI_Request_Connection("MPI", "MM", NULL);
 
   start = clock();
 

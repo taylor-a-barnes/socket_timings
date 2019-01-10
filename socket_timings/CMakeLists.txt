@@ -6,6 +6,10 @@ project(MDI
 find_package(MPI REQUIRED)
 
 include_directories(${MPI_INCLUDE_PATH})
+link_directories(${CMAKE_SOURCE_DIR}/../lib/mdi_build/molssi_driver_interface/)
+
+
+
 
 add_executable(main
            main.c)
@@ -24,10 +28,11 @@ endif()
 
 
 
+
 add_executable(driver
            driver.c)
-target_link_libraries(driver ${CMAKE_SOURCE_DIR}/../lib/mdi_build/molssi_driver_interface/libmdi.a
-                                 ${MPI_LIBRARIES})
+target_link_libraries(driver mdi
+                             ${MPI_LIBRARIES})
 
 if(MPI_COMPILE_FLAGS)
   set_target_properties(driver PROPERTIES
@@ -44,7 +49,7 @@ endif()
 
 add_executable(production
            production.c)
-target_link_libraries(production ${CMAKE_SOURCE_DIR}/../lib/mdi_build/molssi_driver_interface/libmdi.a
+target_link_libraries(production mdi
                                  ${MPI_LIBRARIES})
 
 if(MPI_COMPILE_FLAGS)
@@ -62,7 +67,7 @@ endif()
 
 add_executable(mpi_driver
            mpi_driver.c)
-target_link_libraries(mpi_driver ${CMAKE_SOURCE_DIR}/../lib/mdi_build/molssi_driver_interface/libmdi.a
+target_link_libraries(mpi_driver mdi
                                  ${MPI_LIBRARIES})
 
 if(MPI_COMPILE_FLAGS)
@@ -80,7 +85,7 @@ endif()
 
 add_executable(mpi_production
            mpi_production.c)
-target_link_libraries(mpi_production ${CMAKE_SOURCE_DIR}/../lib/mdi_build/molssi_driver_interface/libmdi.a
+target_link_libraries(mpi_production mdi
                                      ${MPI_LIBRARIES})
 
 if(MPI_COMPILE_FLAGS)
@@ -96,7 +101,7 @@ endif()
 
 add_executable(mpi_driver_f90
            mpi_driver_f90.f90)
-target_link_libraries(mpi_driver_f90 ${CMAKE_SOURCE_DIR}/../lib/mdi_build/molssi_driver_interface/libmdif90.a
+target_link_libraries(mpi_driver_f90 mdi
                                  ${MPI_LIBRARIES})
 target_include_directories(mpi_driver_f90 PUBLIC
    ${CMAKE_SOURCE_DIR}/../lib/mdi_build/molssi_driver_interface/
@@ -115,7 +120,7 @@ endif()
 
 add_executable(mpi_production_f90
            mpi_production_f90.f90)
-target_link_libraries(mpi_production_f90 ${CMAKE_SOURCE_DIR}/../lib/mdi_build/molssi_driver_interface/libmdif90.a
+target_link_libraries(mpi_production_f90 mdi
                                  ${MPI_LIBRARIES})
 target_include_directories(mpi_production_f90 PUBLIC
    ${CMAKE_SOURCE_DIR}/../lib/mdi_build/molssi_driver_interface/

@@ -3,9 +3,14 @@ cmake_minimum_required(VERSION 3.5)
 project(MDI
         LANGUAGES C Fortran)
 
-find_package(MPI REQUIRED)
+find_package(MPI)
 
-include_directories(${MPI_INCLUDE_PATH})
+if(MPI_FOUND)
+   include_directories(${MPI_INCLUDE_PATH})
+else()
+   include_directories(${CMAKE_SOURCE_DIR}/STUBS_MPI/)
+endif()
+
 link_directories(${CMAKE_SOURCE_DIR}/../lib/mdi_build/molssi_driver_interface/)
 
 

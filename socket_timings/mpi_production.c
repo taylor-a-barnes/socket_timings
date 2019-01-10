@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include <time.h>
 #include <mpi.h>
 #include "../lib/mdi_build/molssi_driver_interface/mdi.h"

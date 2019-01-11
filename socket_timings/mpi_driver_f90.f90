@@ -3,11 +3,13 @@ PROGRAM MDI_DRIVER_F90
 USE mpi
 USE ISO_C_binding
 USE mdi,              ONLY : MDI_Listen, MDI_Send, MDI_CHAR, MDI_NAME_LENGTH, &
-     MDI_Accept_Connection, MDI_Send_Command, MDI_Recv
+     MDI_Accept_Connection, MDI_Send_Command, MDI_Recv, MDI_MPI_COMM
 
 IMPLICIT NONE
 
    INTEGER :: niter = 100
+   INTEGER :: mpi_ptr
+   INTEGER :: world_comm, world_rank
    INTEGER :: i, ierr
    INTEGER :: comm_world, comm
    CHARACTER(len=:), ALLOCATABLE :: message
@@ -18,18 +20,26 @@ IMPLICIT NONE
    call MPI_INIT(ierr)
 
    ! Initialize the MDI driver
-   comm_world = MPI_COMM_WORLD
-   call MDI_Listen( "MPI", c_null_ptr, comm_world, ierr)
+   !comm_world = MPI_COMM_WORLD
+   call MDI_Listen( "MPI", c_null_ptr, MPI_COMM_WORLD, ierr)
 
    ! Accept a connection from the production code
    call MDI_Accept_Connection(comm)
 
-   DO i=1, niter
-      call MDI_Send_Command("<NAME", comm, ierr)
-      call MDI_Recv(message, MDI_NAME_LENGTH, MDI_CHAR, comm, ierr)
+   call MDI_MPI_Comm( world_comm, ierr )
+   call MPI_Comm_rank( world_comm, mpi_ptr, ierr );
+   world_rank = mpi_ptr
 
-      WRITE(6,*)'Iteration: ', i, message
+   DO i=1, niter
+      IF( world_rank.eq.0 ) THEN
+         call MDI_Send_Command("<NAME", comm, ierr)
+         call MDI_Recv(message, MDI_NAME_LENGTH, MDI_CHAR, comm, ierr)
+
+         WRITE(6,*)'Iteration: ', i, message
+      END IF
    END DO
+
+   call MPI_Barrier( world_comm, ierr )
 
 END PROGRAM MDI_DRIVER_F90
 

@@ -3,12 +3,14 @@ PROGRAM MDI_DRIVER_F90
 USE mpi
 USE ISO_C_binding
 USE mdi,              ONLY : MDI_Listen, MDI_Send, MDI_CHAR, MDI_NAME_LENGTH, &
-     MDI_Request_Connection, MDI_Recv_Command, MDI_Recv, MDI_MPI
+     MDI_Request_Connection, MDI_Recv_Command, MDI_Recv, MDI_MPI, MDI_MPI_COMM
 
 IMPLICIT NONE
 
    INTEGER :: ierr
-   INTEGER :: comm_world, comm
+   INTEGER :: mpi_ptr
+   INTEGER :: world_comm, world_rank
+   INTEGER :: comm
    CHARACTER(len=:), ALLOCATABLE :: message
 
    ALLOCATE( character(MDI_NAME_LENGTH) :: message )
@@ -17,21 +19,25 @@ IMPLICIT NONE
    call MPI_INIT(ierr)
 
    ! Initialize the MDI driver
-   comm_world = MPI_COMM_WORLD
-   !call MDI_Open( comm, MDI_MPI, 0, "MM")
-   call MDI_Request_Connection( "MPI", "MM", comm_world, comm )
+   call MDI_Request_Connection( "MPI", "MM", MPI_COMM_WORLD, comm )
+
+   call MDI_MPI_Comm( world_comm, ierr )
+   call MPI_Comm_rank( world_comm, mpi_ptr, ierr );
+   world_rank = mpi_ptr
 
    ! respond to the driver's commands
    response_loop: DO
 
-      call MDI_Recv_Command(message, comm, ierr)
+      IF( world_rank.eq.0 )THEN
+         call MDI_Recv_Command(message, comm, ierr)
 
-      SELECT CASE( TRIM(message) )
-      CASE( "<NAME" )
-         call MDI_Send("PONG_F90", MDI_NAME_LENGTH, MDI_CHAR, comm, ierr)
-      CASE( "<EXIT" )
-         EXIT
-      END SELECT
+         SELECT CASE( TRIM(message) )
+         CASE( "<NAME" )
+            call MDI_Send("PONG_F90", MDI_NAME_LENGTH, MDI_CHAR, comm, ierr)
+         CASE( "<EXIT" )
+            EXIT
+         END SELECT
+      END IF
 
    END DO response_loop
 

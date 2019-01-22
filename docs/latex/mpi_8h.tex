@@ -1,0 +1,181 @@
+\hypertarget{mpi_8h}{\section{socket\-\_\-timings/\-S\-T\-U\-B\-S\-\_\-\-M\-P\-I/mpi.h File Reference}
+\label{mpi_8h}\index{socket\-\_\-timings/\-S\-T\-U\-B\-S\-\_\-\-M\-P\-I/mpi.\-h@{socket\-\_\-timings/\-S\-T\-U\-B\-S\-\_\-\-M\-P\-I/mpi.\-h}}
+}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{mpi_8h_a32c2e019a42e9bfc9db6f8d9cf6adb4e}{M\-P\-I\-\_\-\-M\-A\-X\-\_\-\-P\-R\-O\-C\-E\-S\-S\-O\-R\-\_\-\-N\-A\-M\-E}~0
+\item 
+\#define \hyperlink{mpi_8h_a5aa5d95899a24d9e8f208e8436be8758}{M\-P\-I\-\_\-\-S\-T\-A\-T\-U\-S\-\_\-\-I\-G\-N\-O\-R\-E}~0
+\item 
+\#define \hyperlink{mpi_8h_a2df6a15627583d5e6f5a48550644cbef}{M\-P\-I\-\_\-\-C\-O\-M\-M\-\_\-\-W\-O\-R\-L\-D}~0
+\item 
+\#define \hyperlink{mpi_8h_a43ed7cd86d20f84db849adc64a09415e}{M\-P\-I\-\_\-\-I\-N\-T}~1
+\item 
+\#define \hyperlink{mpi_8h_aafd1dc0086079e7904385538c54c9c8f}{M\-P\-I\-\_\-\-D\-O\-U\-B\-L\-E}~4
+\item 
+\#define \hyperlink{mpi_8h_ac521acab90e22ecd11466d7229986673}{M\-P\-I\-\_\-\-C\-H\-A\-R}~5
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef int \hyperlink{mpi_8h_a68c509d4adb3f4a1d6fe3a9b0b87c7b9}{M\-P\-I\-\_\-\-Comm}
+\item 
+typedef int \hyperlink{mpi_8h_affc17fe964f9f670fb06e09d6134b4ff}{M\-P\-I\-\_\-\-Datatype}
+\item 
+typedef int \hyperlink{mpi_8h_a6f523fd28133681c4596ddd5af1d6a89}{M\-P\-I\-\_\-\-Status}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{mpi_8h_a85fc482f00c52ec6e5f2503b3b480c56}{M\-P\-I\-\_\-\-Init} (int $\ast$argc, char $\ast$$\ast$$\ast$argv)
+\item 
+int \hyperlink{mpi_8h_a91a0cf5613b31a183a5453446191f1df}{M\-P\-I\-\_\-\-Finalize} (void)
+\item 
+int \hyperlink{mpi_8h_a3199e776e016cbaaed648c2e8c32dd04}{M\-P\-I\-\_\-\-Comm\-\_\-rank} (\hyperlink{mpi_8h_a68c509d4adb3f4a1d6fe3a9b0b87c7b9}{M\-P\-I\-\_\-\-Comm} comm, int $\ast$rank)
+\item 
+int \hyperlink{mpi_8h_af02c1da1e2be331e53ac3e5f8ccfedb6}{M\-P\-I\-\_\-\-Comm\-\_\-size} (\hyperlink{mpi_8h_a68c509d4adb3f4a1d6fe3a9b0b87c7b9}{M\-P\-I\-\_\-\-Comm} comm, int $\ast$size)
+\item 
+int \hyperlink{mpi_8h_a65f09ba60f2011e21d4761dc9701e6dd}{M\-P\-I\-\_\-\-Get\-\_\-processor\-\_\-name} (char $\ast$name, int $\ast$resultlen)
+\item 
+int \hyperlink{mpi_8h_a38a750883860adf3d7cee6f56442261a}{M\-P\-I\-\_\-\-Barrier} (\hyperlink{mpi_8h_a68c509d4adb3f4a1d6fe3a9b0b87c7b9}{M\-P\-I\-\_\-\-Comm} comm)
+\item 
+int \hyperlink{mpi_8h_ac3e495f26b417417d8c1631cd771a521}{M\-P\-I\-\_\-\-Gather} (const void $\ast$sendbuf, int sendcount, \hyperlink{mpi_8h_affc17fe964f9f670fb06e09d6134b4ff}{M\-P\-I\-\_\-\-Datatype} sendtype, void $\ast$recvbuf, int recvcount, \hyperlink{mpi_8h_affc17fe964f9f670fb06e09d6134b4ff}{M\-P\-I\-\_\-\-Datatype} recvtype, int root, \hyperlink{mpi_8h_a68c509d4adb3f4a1d6fe3a9b0b87c7b9}{M\-P\-I\-\_\-\-Comm} comm)
+\item 
+int \hyperlink{mpi_8h_a960f99d8a52aff16b943c6eb45dcd8b1}{M\-P\-I\-\_\-\-Send} (const void $\ast$buf, int count, \hyperlink{mpi_8h_affc17fe964f9f670fb06e09d6134b4ff}{M\-P\-I\-\_\-\-Datatype} datatype, int dest, int tag, \hyperlink{mpi_8h_a68c509d4adb3f4a1d6fe3a9b0b87c7b9}{M\-P\-I\-\_\-\-Comm} comm)
+\item 
+int \hyperlink{mpi_8h_a27b9cce644f78aa09796b4108bdf0cbc}{M\-P\-I\-\_\-\-Recv} (void $\ast$buf, int count, \hyperlink{mpi_8h_affc17fe964f9f670fb06e09d6134b4ff}{M\-P\-I\-\_\-\-Datatype} datatype, int source, int tag, \hyperlink{mpi_8h_a68c509d4adb3f4a1d6fe3a9b0b87c7b9}{M\-P\-I\-\_\-\-Comm} comm, \hyperlink{mpi_8h_a6f523fd28133681c4596ddd5af1d6a89}{M\-P\-I\-\_\-\-Status} $\ast$status)
+\item 
+int \hyperlink{mpi_8h_a2846a8668afb120361d176ea159bf2db}{M\-P\-I\-\_\-\-Comm\-\_\-split} (\hyperlink{mpi_8h_a68c509d4adb3f4a1d6fe3a9b0b87c7b9}{M\-P\-I\-\_\-\-Comm} comm, int color, int key, \hyperlink{mpi_8h_a68c509d4adb3f4a1d6fe3a9b0b87c7b9}{M\-P\-I\-\_\-\-Comm} $\ast$newcomm)
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{mpi_8h_ac521acab90e22ecd11466d7229986673}{\index{mpi.\-h@{mpi.\-h}!M\-P\-I\-\_\-\-C\-H\-A\-R@{M\-P\-I\-\_\-\-C\-H\-A\-R}}
+\index{M\-P\-I\-\_\-\-C\-H\-A\-R@{M\-P\-I\-\_\-\-C\-H\-A\-R}!mpi.h@{mpi.\-h}}
+\subsubsection[{M\-P\-I\-\_\-\-C\-H\-A\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\-P\-I\-\_\-\-C\-H\-A\-R~5}}\label{mpi_8h_ac521acab90e22ecd11466d7229986673}
+\hypertarget{mpi_8h_a2df6a15627583d5e6f5a48550644cbef}{\index{mpi.\-h@{mpi.\-h}!M\-P\-I\-\_\-\-C\-O\-M\-M\-\_\-\-W\-O\-R\-L\-D@{M\-P\-I\-\_\-\-C\-O\-M\-M\-\_\-\-W\-O\-R\-L\-D}}
+\index{M\-P\-I\-\_\-\-C\-O\-M\-M\-\_\-\-W\-O\-R\-L\-D@{M\-P\-I\-\_\-\-C\-O\-M\-M\-\_\-\-W\-O\-R\-L\-D}!mpi.h@{mpi.\-h}}
+\subsubsection[{M\-P\-I\-\_\-\-C\-O\-M\-M\-\_\-\-W\-O\-R\-L\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\-P\-I\-\_\-\-C\-O\-M\-M\-\_\-\-W\-O\-R\-L\-D~0}}\label{mpi_8h_a2df6a15627583d5e6f5a48550644cbef}
+\hypertarget{mpi_8h_aafd1dc0086079e7904385538c54c9c8f}{\index{mpi.\-h@{mpi.\-h}!M\-P\-I\-\_\-\-D\-O\-U\-B\-L\-E@{M\-P\-I\-\_\-\-D\-O\-U\-B\-L\-E}}
+\index{M\-P\-I\-\_\-\-D\-O\-U\-B\-L\-E@{M\-P\-I\-\_\-\-D\-O\-U\-B\-L\-E}!mpi.h@{mpi.\-h}}
+\subsubsection[{M\-P\-I\-\_\-\-D\-O\-U\-B\-L\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\-P\-I\-\_\-\-D\-O\-U\-B\-L\-E~4}}\label{mpi_8h_aafd1dc0086079e7904385538c54c9c8f}
+\hypertarget{mpi_8h_a43ed7cd86d20f84db849adc64a09415e}{\index{mpi.\-h@{mpi.\-h}!M\-P\-I\-\_\-\-I\-N\-T@{M\-P\-I\-\_\-\-I\-N\-T}}
+\index{M\-P\-I\-\_\-\-I\-N\-T@{M\-P\-I\-\_\-\-I\-N\-T}!mpi.h@{mpi.\-h}}
+\subsubsection[{M\-P\-I\-\_\-\-I\-N\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\-P\-I\-\_\-\-I\-N\-T~1}}\label{mpi_8h_a43ed7cd86d20f84db849adc64a09415e}
+\hypertarget{mpi_8h_a32c2e019a42e9bfc9db6f8d9cf6adb4e}{\index{mpi.\-h@{mpi.\-h}!M\-P\-I\-\_\-\-M\-A\-X\-\_\-\-P\-R\-O\-C\-E\-S\-S\-O\-R\-\_\-\-N\-A\-M\-E@{M\-P\-I\-\_\-\-M\-A\-X\-\_\-\-P\-R\-O\-C\-E\-S\-S\-O\-R\-\_\-\-N\-A\-M\-E}}
+\index{M\-P\-I\-\_\-\-M\-A\-X\-\_\-\-P\-R\-O\-C\-E\-S\-S\-O\-R\-\_\-\-N\-A\-M\-E@{M\-P\-I\-\_\-\-M\-A\-X\-\_\-\-P\-R\-O\-C\-E\-S\-S\-O\-R\-\_\-\-N\-A\-M\-E}!mpi.h@{mpi.\-h}}
+\subsubsection[{M\-P\-I\-\_\-\-M\-A\-X\-\_\-\-P\-R\-O\-C\-E\-S\-S\-O\-R\-\_\-\-N\-A\-M\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\-P\-I\-\_\-\-M\-A\-X\-\_\-\-P\-R\-O\-C\-E\-S\-S\-O\-R\-\_\-\-N\-A\-M\-E~0}}\label{mpi_8h_a32c2e019a42e9bfc9db6f8d9cf6adb4e}
+\hypertarget{mpi_8h_a5aa5d95899a24d9e8f208e8436be8758}{\index{mpi.\-h@{mpi.\-h}!M\-P\-I\-\_\-\-S\-T\-A\-T\-U\-S\-\_\-\-I\-G\-N\-O\-R\-E@{M\-P\-I\-\_\-\-S\-T\-A\-T\-U\-S\-\_\-\-I\-G\-N\-O\-R\-E}}
+\index{M\-P\-I\-\_\-\-S\-T\-A\-T\-U\-S\-\_\-\-I\-G\-N\-O\-R\-E@{M\-P\-I\-\_\-\-S\-T\-A\-T\-U\-S\-\_\-\-I\-G\-N\-O\-R\-E}!mpi.h@{mpi.\-h}}
+\subsubsection[{M\-P\-I\-\_\-\-S\-T\-A\-T\-U\-S\-\_\-\-I\-G\-N\-O\-R\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\-P\-I\-\_\-\-S\-T\-A\-T\-U\-S\-\_\-\-I\-G\-N\-O\-R\-E~0}}\label{mpi_8h_a5aa5d95899a24d9e8f208e8436be8758}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{mpi_8h_a68c509d4adb3f4a1d6fe3a9b0b87c7b9}{\index{mpi.\-h@{mpi.\-h}!M\-P\-I\-\_\-\-Comm@{M\-P\-I\-\_\-\-Comm}}
+\index{M\-P\-I\-\_\-\-Comm@{M\-P\-I\-\_\-\-Comm}!mpi.h@{mpi.\-h}}
+\subsubsection[{M\-P\-I\-\_\-\-Comm}]{\setlength{\rightskip}{0pt plus 5cm}typedef int {\bf M\-P\-I\-\_\-\-Comm}}}\label{mpi_8h_a68c509d4adb3f4a1d6fe3a9b0b87c7b9}
+\hypertarget{mpi_8h_affc17fe964f9f670fb06e09d6134b4ff}{\index{mpi.\-h@{mpi.\-h}!M\-P\-I\-\_\-\-Datatype@{M\-P\-I\-\_\-\-Datatype}}
+\index{M\-P\-I\-\_\-\-Datatype@{M\-P\-I\-\_\-\-Datatype}!mpi.h@{mpi.\-h}}
+\subsubsection[{M\-P\-I\-\_\-\-Datatype}]{\setlength{\rightskip}{0pt plus 5cm}typedef int {\bf M\-P\-I\-\_\-\-Datatype}}}\label{mpi_8h_affc17fe964f9f670fb06e09d6134b4ff}
+\hypertarget{mpi_8h_a6f523fd28133681c4596ddd5af1d6a89}{\index{mpi.\-h@{mpi.\-h}!M\-P\-I\-\_\-\-Status@{M\-P\-I\-\_\-\-Status}}
+\index{M\-P\-I\-\_\-\-Status@{M\-P\-I\-\_\-\-Status}!mpi.h@{mpi.\-h}}
+\subsubsection[{M\-P\-I\-\_\-\-Status}]{\setlength{\rightskip}{0pt plus 5cm}typedef int {\bf M\-P\-I\-\_\-\-Status}}}\label{mpi_8h_a6f523fd28133681c4596ddd5af1d6a89}
+
+
+\subsection{Function Documentation}
+\hypertarget{mpi_8h_a38a750883860adf3d7cee6f56442261a}{\index{mpi.\-h@{mpi.\-h}!M\-P\-I\-\_\-\-Barrier@{M\-P\-I\-\_\-\-Barrier}}
+\index{M\-P\-I\-\_\-\-Barrier@{M\-P\-I\-\_\-\-Barrier}!mpi.h@{mpi.\-h}}
+\subsubsection[{M\-P\-I\-\_\-\-Barrier}]{\setlength{\rightskip}{0pt plus 5cm}int M\-P\-I\-\_\-\-Barrier (
+\begin{DoxyParamCaption}
+\item[{{\bf M\-P\-I\-\_\-\-Comm}}]{comm}
+\end{DoxyParamCaption}
+)}}\label{mpi_8h_a38a750883860adf3d7cee6f56442261a}
+\hypertarget{mpi_8h_a3199e776e016cbaaed648c2e8c32dd04}{\index{mpi.\-h@{mpi.\-h}!M\-P\-I\-\_\-\-Comm\-\_\-rank@{M\-P\-I\-\_\-\-Comm\-\_\-rank}}
+\index{M\-P\-I\-\_\-\-Comm\-\_\-rank@{M\-P\-I\-\_\-\-Comm\-\_\-rank}!mpi.h@{mpi.\-h}}
+\subsubsection[{M\-P\-I\-\_\-\-Comm\-\_\-rank}]{\setlength{\rightskip}{0pt plus 5cm}int M\-P\-I\-\_\-\-Comm\-\_\-rank (
+\begin{DoxyParamCaption}
+\item[{{\bf M\-P\-I\-\_\-\-Comm}}]{comm, }
+\item[{int $\ast$}]{rank}
+\end{DoxyParamCaption}
+)}}\label{mpi_8h_a3199e776e016cbaaed648c2e8c32dd04}
+\hypertarget{mpi_8h_af02c1da1e2be331e53ac3e5f8ccfedb6}{\index{mpi.\-h@{mpi.\-h}!M\-P\-I\-\_\-\-Comm\-\_\-size@{M\-P\-I\-\_\-\-Comm\-\_\-size}}
+\index{M\-P\-I\-\_\-\-Comm\-\_\-size@{M\-P\-I\-\_\-\-Comm\-\_\-size}!mpi.h@{mpi.\-h}}
+\subsubsection[{M\-P\-I\-\_\-\-Comm\-\_\-size}]{\setlength{\rightskip}{0pt plus 5cm}int M\-P\-I\-\_\-\-Comm\-\_\-size (
+\begin{DoxyParamCaption}
+\item[{{\bf M\-P\-I\-\_\-\-Comm}}]{comm, }
+\item[{int $\ast$}]{size}
+\end{DoxyParamCaption}
+)}}\label{mpi_8h_af02c1da1e2be331e53ac3e5f8ccfedb6}
+\hypertarget{mpi_8h_a2846a8668afb120361d176ea159bf2db}{\index{mpi.\-h@{mpi.\-h}!M\-P\-I\-\_\-\-Comm\-\_\-split@{M\-P\-I\-\_\-\-Comm\-\_\-split}}
+\index{M\-P\-I\-\_\-\-Comm\-\_\-split@{M\-P\-I\-\_\-\-Comm\-\_\-split}!mpi.h@{mpi.\-h}}
+\subsubsection[{M\-P\-I\-\_\-\-Comm\-\_\-split}]{\setlength{\rightskip}{0pt plus 5cm}int M\-P\-I\-\_\-\-Comm\-\_\-split (
+\begin{DoxyParamCaption}
+\item[{{\bf M\-P\-I\-\_\-\-Comm}}]{comm, }
+\item[{int}]{color, }
+\item[{int}]{key, }
+\item[{{\bf M\-P\-I\-\_\-\-Comm} $\ast$}]{newcomm}
+\end{DoxyParamCaption}
+)}}\label{mpi_8h_a2846a8668afb120361d176ea159bf2db}
+\hypertarget{mpi_8h_a91a0cf5613b31a183a5453446191f1df}{\index{mpi.\-h@{mpi.\-h}!M\-P\-I\-\_\-\-Finalize@{M\-P\-I\-\_\-\-Finalize}}
+\index{M\-P\-I\-\_\-\-Finalize@{M\-P\-I\-\_\-\-Finalize}!mpi.h@{mpi.\-h}}
+\subsubsection[{M\-P\-I\-\_\-\-Finalize}]{\setlength{\rightskip}{0pt plus 5cm}int M\-P\-I\-\_\-\-Finalize (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{mpi_8h_a91a0cf5613b31a183a5453446191f1df}
+\hypertarget{mpi_8h_ac3e495f26b417417d8c1631cd771a521}{\index{mpi.\-h@{mpi.\-h}!M\-P\-I\-\_\-\-Gather@{M\-P\-I\-\_\-\-Gather}}
+\index{M\-P\-I\-\_\-\-Gather@{M\-P\-I\-\_\-\-Gather}!mpi.h@{mpi.\-h}}
+\subsubsection[{M\-P\-I\-\_\-\-Gather}]{\setlength{\rightskip}{0pt plus 5cm}int M\-P\-I\-\_\-\-Gather (
+\begin{DoxyParamCaption}
+\item[{const void $\ast$}]{sendbuf, }
+\item[{int}]{sendcount, }
+\item[{{\bf M\-P\-I\-\_\-\-Datatype}}]{sendtype, }
+\item[{void $\ast$}]{recvbuf, }
+\item[{int}]{recvcount, }
+\item[{{\bf M\-P\-I\-\_\-\-Datatype}}]{recvtype, }
+\item[{int}]{root, }
+\item[{{\bf M\-P\-I\-\_\-\-Comm}}]{comm}
+\end{DoxyParamCaption}
+)}}\label{mpi_8h_ac3e495f26b417417d8c1631cd771a521}
+\hypertarget{mpi_8h_a65f09ba60f2011e21d4761dc9701e6dd}{\index{mpi.\-h@{mpi.\-h}!M\-P\-I\-\_\-\-Get\-\_\-processor\-\_\-name@{M\-P\-I\-\_\-\-Get\-\_\-processor\-\_\-name}}
+\index{M\-P\-I\-\_\-\-Get\-\_\-processor\-\_\-name@{M\-P\-I\-\_\-\-Get\-\_\-processor\-\_\-name}!mpi.h@{mpi.\-h}}
+\subsubsection[{M\-P\-I\-\_\-\-Get\-\_\-processor\-\_\-name}]{\setlength{\rightskip}{0pt plus 5cm}int M\-P\-I\-\_\-\-Get\-\_\-processor\-\_\-name (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{name, }
+\item[{int $\ast$}]{resultlen}
+\end{DoxyParamCaption}
+)}}\label{mpi_8h_a65f09ba60f2011e21d4761dc9701e6dd}
+\hypertarget{mpi_8h_a85fc482f00c52ec6e5f2503b3b480c56}{\index{mpi.\-h@{mpi.\-h}!M\-P\-I\-\_\-\-Init@{M\-P\-I\-\_\-\-Init}}
+\index{M\-P\-I\-\_\-\-Init@{M\-P\-I\-\_\-\-Init}!mpi.h@{mpi.\-h}}
+\subsubsection[{M\-P\-I\-\_\-\-Init}]{\setlength{\rightskip}{0pt plus 5cm}int M\-P\-I\-\_\-\-Init (
+\begin{DoxyParamCaption}
+\item[{int $\ast$}]{argc, }
+\item[{char $\ast$$\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}}\label{mpi_8h_a85fc482f00c52ec6e5f2503b3b480c56}
+\hypertarget{mpi_8h_a27b9cce644f78aa09796b4108bdf0cbc}{\index{mpi.\-h@{mpi.\-h}!M\-P\-I\-\_\-\-Recv@{M\-P\-I\-\_\-\-Recv}}
+\index{M\-P\-I\-\_\-\-Recv@{M\-P\-I\-\_\-\-Recv}!mpi.h@{mpi.\-h}}
+\subsubsection[{M\-P\-I\-\_\-\-Recv}]{\setlength{\rightskip}{0pt plus 5cm}int M\-P\-I\-\_\-\-Recv (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{buf, }
+\item[{int}]{count, }
+\item[{{\bf M\-P\-I\-\_\-\-Datatype}}]{datatype, }
+\item[{int}]{source, }
+\item[{int}]{tag, }
+\item[{{\bf M\-P\-I\-\_\-\-Comm}}]{comm, }
+\item[{{\bf M\-P\-I\-\_\-\-Status} $\ast$}]{status}
+\end{DoxyParamCaption}
+)}}\label{mpi_8h_a27b9cce644f78aa09796b4108bdf0cbc}
+\hypertarget{mpi_8h_a960f99d8a52aff16b943c6eb45dcd8b1}{\index{mpi.\-h@{mpi.\-h}!M\-P\-I\-\_\-\-Send@{M\-P\-I\-\_\-\-Send}}
+\index{M\-P\-I\-\_\-\-Send@{M\-P\-I\-\_\-\-Send}!mpi.h@{mpi.\-h}}
+\subsubsection[{M\-P\-I\-\_\-\-Send}]{\setlength{\rightskip}{0pt plus 5cm}int M\-P\-I\-\_\-\-Send (
+\begin{DoxyParamCaption}
+\item[{const void $\ast$}]{buf, }
+\item[{int}]{count, }
+\item[{{\bf M\-P\-I\-\_\-\-Datatype}}]{datatype, }
+\item[{int}]{dest, }
+\item[{int}]{tag, }
+\item[{{\bf M\-P\-I\-\_\-\-Comm}}]{comm}
+\end{DoxyParamCaption}
+)}}\label{mpi_8h_a960f99d8a52aff16b943c6eb45dcd8b1}

@@ -2,6 +2,11 @@
 #include <stdio.h>
 #include <time.h>
 
+/*! \file
+ *
+ * \brief Pure MPI test.
+ */
+
 void mpi_ping_pong(int my_rank) {
   if(my_rank == 0) {
     char message[12] = "ping        ";

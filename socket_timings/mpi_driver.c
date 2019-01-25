@@ -12,19 +12,32 @@ void mdi_ping_pong(int comm) {
   //printf("NAME: %s\n",message);
 }
 
-int main() {
+int main(int argc, char **argv) {
   clock_t start, end;
   double cpu_time;
   int niter = 100000;
   int mpi_ptr;
   int world_rank;
   MPI_Comm world_comm;
+  int i;
 
   // Initialize the MPI environment
-  MPI_Init(NULL, NULL);
+  MPI_Init(&argc, &argv);
+
+  // Ensure that the mdi argument has been provided
+  int iarg = 1;
+  if ( !( argc-iarg >= 2 && strcmp(argv[iarg],"-mdi") == 0) ) {
+    perror("The -mdi argument was not provided");
+    return -1;
+  }
+  /*
+  for (i=0; i<argc; i++) {
+    printf("argument: %i (%s)\n",i,argv[i]);
+  }
+  */
 
   // Initialize the MDI driver
-  int ret = MDI_Listen("MPI", NULL, NULL);
+  int ret = MDI_Init(argv[iarg+1], NULL, &world_comm);
 
   // Accept a connection from the production code
   int comm = MDI_Accept_Connection();
@@ -40,7 +53,6 @@ int main() {
   start = clock();
 
   if ( world_rank == 0 ) {
-    int i;
     for (i=0; i<niter; i++) {
       mdi_ping_pong(comm);
       if (i%1000 == 0) {

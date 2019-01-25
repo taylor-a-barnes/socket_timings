@@ -11,14 +11,15 @@ void mdi_ping_pong(int comm) {
   //printf("NAME: %s\n",message);
 }
 
-int main() {
+int main(int argc, char **argv) {
   clock_t start, end;
   double cpu_time;
   int niter = 100000;
 
   // Initialize the MDI driver
   //int ret = MDI_Init(8021);
-  int ret = MDI_Listen("TCP","8021",NULL);
+  //int ret = MDI_Listen("TCP","8021",NULL);
+  int ret = MDI_Init(argv[1], NULL, NULL);
 
   // Accept a connection from the production code
   int comm = MDI_Accept_Connection();

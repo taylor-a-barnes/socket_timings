@@ -2,7 +2,7 @@ PROGRAM MDI_DRIVER_F90
 
 USE mpi
 USE ISO_C_binding
-USE mdi,              ONLY : MDI_Listen, MDI_Send, MDI_CHAR, MDI_NAME_LENGTH, &
+USE mdi,              ONLY : MDI_Init, MDI_Send, MDI_CHAR, MDI_NAME_LENGTH, &
      MDI_Accept_Connection, MDI_Send_Command, MDI_Recv, MDI_MPI_COMM
 
 IMPLICIT NONE
@@ -13,15 +13,32 @@ IMPLICIT NONE
    INTEGER :: i, ierr
    INTEGER :: comm_world, comm
    CHARACTER(len=:), ALLOCATABLE :: message
+   CHARACTER(len=1024) :: arg
+   CHARACTER(len=1024) :: mdi_options
 
    ALLOCATE( character(MDI_NAME_LENGTH) :: message )
 
    ! Initialize the MPI environment
    call MPI_INIT(ierr)
 
+   ! Get the command line arguments
+   i = 0
+   DO
+      CALL get_command_argument(i, arg)
+      IF (LEN_TRIM(arg) == 0) EXIT
+
+      IF (TRIM(arg) .eq. "-mdi") THEN
+         CALL get_command_argument(i+1, mdi_options)
+         EXIT
+      END IF
+
+      i = i+1
+   END DO
+
    ! Initialize the MDI driver
    !comm_world = MPI_COMM_WORLD
-   call MDI_Listen( "MPI", c_null_ptr, MPI_COMM_WORLD, ierr)
+   !call MDI_Listen( "MPI", c_null_ptr, MPI_COMM_WORLD, ierr)
+   call MDI_Init( mdi_options, c_null_ptr, MPI_COMM_WORLD, ierr)
 
    ! Accept a connection from the production code
    call MDI_Accept_Connection(comm)

@@ -2,7 +2,7 @@ PROGRAM MDI_DRIVER_F90
 
 USE mpi
 USE ISO_C_binding
-USE mdi,              ONLY : MDI_Listen, MDI_Send, MDI_CHAR, MDI_NAME_LENGTH, &
+USE mdi,              ONLY : MDI_Send, MDI_CHAR, MDI_NAME_LENGTH, &
      MDI_Request_Connection, MDI_Recv_Command, MDI_Recv, MDI_MPI, MDI_MPI_COMM
 
 IMPLICIT NONE

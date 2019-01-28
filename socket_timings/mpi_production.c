@@ -4,7 +4,7 @@
 #include <mpi.h>
 #include "../lib/mdi_build/molssi_driver_interface/mdi.h"
 
-int main() {
+int main(int argc, char **argv) {
   clock_t start, end;
   double cpu_time;
   int mpi_ptr;
@@ -12,16 +12,28 @@ int main() {
   MPI_Comm world_comm;
 
   // Initialize the MPI environment
-  MPI_Init(NULL, NULL);
+  MPI_Init(&argc, &argv);
+
+  // Ensure the mdi argument has been provided
+  int iarg = 1;
+  if ( !( argc-iarg >= 2 && strcmp(argv[iarg],"-mdi") == 0) ) {
+    perror("The -mdi argument was not provided");
+    return -1;
+  }
 
   // Initialize the MDI driver
-  int comm = MDI_Request_Connection("MPI", "MM", NULL);
+  //int comm = MDI_Request_Connection("MPI", "MM", NULL);
+  world_comm = MPI_COMM_WORLD;
+  int ret = MDI_Init(argv[iarg+1], NULL, &world_comm);
+
+  // Accept the connection to the driver code
+  int comm = MDI_Accept_Connection();
 
   // Note: For reasons I don't fully understand, the pointer returned by MPI
   // doesn't seem to persist throughout the test.
   // As a workaround, use mpi_ptr as the argument and then assign world_rank
   // to its value.
-  MDI_MPI_Comm( &world_comm );
+  //MDI_MPI_Comm( &world_comm );
   MPI_Comm_rank(world_comm, &mpi_ptr);
   world_rank = mpi_ptr;
 

@@ -24,7 +24,7 @@ int main(int argc, char **argv) {
   // Initialize the MPI environment
   MPI_Init(&argc, &argv);
 
-  // Ensure that the mdi argument has been provided
+  // Ensure the mdi argument has been provided
   int iarg = 1;
   if ( !( argc-iarg >= 2 && strcmp(argv[iarg],"-mdi") == 0) ) {
     perror("The -mdi argument was not provided");
@@ -37,6 +37,7 @@ int main(int argc, char **argv) {
   */
 
   // Initialize the MDI driver
+  world_comm = MPI_COMM_WORLD;
   int ret = MDI_Init(argv[iarg+1], NULL, &world_comm);
 
   // Accept a connection from the production code
@@ -46,7 +47,7 @@ int main(int argc, char **argv) {
   // doesn't seem to persist throughout the test.
   // As a workaround, use mpi_ptr as the argument and then assign world_rank
   // to its value.
-  MDI_MPI_Comm( &world_comm );
+  //MDI_MPI_Comm( &world_comm );
   MPI_Comm_rank(world_comm, &mpi_ptr);
   world_rank = mpi_ptr;
 

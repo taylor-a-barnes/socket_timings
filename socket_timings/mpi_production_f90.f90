@@ -3,25 +3,46 @@ PROGRAM MDI_DRIVER_F90
 USE mpi
 USE ISO_C_binding
 USE mdi,              ONLY : MDI_Send, MDI_CHAR, MDI_NAME_LENGTH, &
-     MDI_Request_Connection, MDI_Recv_Command, MDI_Recv, MDI_MPI, MDI_MPI_COMM
+     MDI_Accept_Connection, MDI_Recv_Command, MDI_Recv, MDI_MPI, MDI_MPI_COMM, MDI_Init
 
 IMPLICIT NONE
 
-   INTEGER :: ierr
+   INTEGER :: i, ierr
    INTEGER :: mpi_ptr
    INTEGER :: world_comm, world_rank
    INTEGER :: comm
    CHARACTER(len=:), ALLOCATABLE :: message
+   CHARACTER(len=1024) :: arg
+   CHARACTER(len=1024) :: mdi_options
 
    ALLOCATE( character(MDI_NAME_LENGTH) :: message )
 
    ! Initialize the MPI environment
    call MPI_INIT(ierr)
 
-   ! Initialize the MDI driver
-   call MDI_Request_Connection( "MPI", "MM", MPI_COMM_WORLD, comm )
+   ! Get the command line arguments
+   i = 0
+   DO
+      CALL get_command_argument(i, arg)
+      IF (LEN_TRIM(arg) == 0) EXIT
 
-   call MDI_MPI_Comm( world_comm, ierr )
+      IF (TRIM(arg) .eq. "-mdi") THEN
+         CALL get_command_argument(i+1, mdi_options)
+         EXIT
+      END IF
+
+      i = i+1
+   END DO
+
+   ! Initialize the MDI driver
+   world_comm = MPI_COMM_WORLD
+   !call MDI_Request_Connection( "MPI", "MM", MPI_COMM_WORLD, comm )
+   call MDI_Init( mdi_options, c_null_ptr, world_comm, ierr)
+
+   ! Accept the connection to the production code
+   call MDI_Accept_Connection(comm)
+
+   !call MDI_MPI_Comm( world_comm, ierr )
    call MPI_Comm_rank( world_comm, mpi_ptr, ierr );
    world_rank = mpi_ptr
 

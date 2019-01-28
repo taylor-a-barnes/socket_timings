@@ -36,14 +36,14 @@ IMPLICIT NONE
    END DO
 
    ! Initialize the MDI driver
-   !comm_world = MPI_COMM_WORLD
+   world_comm = MPI_COMM_WORLD
    !call MDI_Listen( "MPI", c_null_ptr, MPI_COMM_WORLD, ierr)
-   call MDI_Init( mdi_options, c_null_ptr, MPI_COMM_WORLD, ierr)
+   call MDI_Init( mdi_options, c_null_ptr, world_comm, ierr)
 
    ! Accept a connection from the production code
    call MDI_Accept_Connection(comm)
 
-   call MDI_MPI_Comm( world_comm, ierr )
+   !call MDI_MPI_Comm( world_comm, ierr )
    call MPI_Comm_rank( world_comm, mpi_ptr, ierr );
    world_rank = mpi_ptr
 

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 
 project(MDI
-        LANGUAGES C Fortran)
+        LANGUAGES C CXX Fortran)
 
 find_package(MPI)
 
@@ -38,6 +38,8 @@ add_executable(driver
            driver.c)
 target_link_libraries(driver mdi
                              ${MPI_LIBRARIES})
+set_target_properties(driver
+                      PROPERTIES LINKER_LANGUAGE CXX)
 
 if(MPI_COMPILE_FLAGS)
   set_target_properties(driver PROPERTIES
@@ -56,6 +58,8 @@ add_executable(production
            production.c)
 target_link_libraries(production mdi
                                  ${MPI_LIBRARIES})
+set_target_properties(production
+                      PROPERTIES LINKER_LANGUAGE CXX)
 
 if(MPI_COMPILE_FLAGS)
   set_target_properties(production PROPERTIES
@@ -74,6 +78,8 @@ add_executable(mpi_driver
            mpi_driver.c)
 target_link_libraries(mpi_driver mdi
                                  ${MPI_LIBRARIES})
+set_target_properties(mpi_driver
+                      PROPERTIES LINKER_LANGUAGE CXX)
 
 if(MPI_COMPILE_FLAGS)
   set_target_properties(mpi_driver PROPERTIES
@@ -92,6 +98,8 @@ add_executable(mpi_production
            mpi_production.c)
 target_link_libraries(mpi_production mdi
                                      ${MPI_LIBRARIES})
+set_target_properties(mpi_production
+                      PROPERTIES LINKER_LANGUAGE CXX)
 
 if(MPI_COMPILE_FLAGS)
   set_target_properties(mpi_production PROPERTIES

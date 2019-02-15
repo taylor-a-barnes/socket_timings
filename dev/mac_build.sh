@@ -25,4 +25,8 @@ rm -rf build
 mkdir build
 cd build
 cmake ../socket_timings
-make
+make driver
+make production
+make mpi_driver
+make mpi_production
+

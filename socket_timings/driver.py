@@ -1,13 +1,10 @@
 import sys
-#sys.path.insert(0, '../lib/mdi_build/molssi_driver_interface')
-#sys.path.insert(0, '/Users/tbarnes/Documents/mdi/socket_timings/lib/mdi_build/molssi_driver_interface')
-
 import mdi.mdi_python as mdi
 
 niterations = 10
 
 # initialize the socket
-mdi.MDI_Init("-role DRIVER -name driver -method TCP -port 8021 -hostname localhost",None,None)
+mdi.MDI_Init(sys.argv[2],None,None)
 
 # connect to the production codes
 ncodes = 1

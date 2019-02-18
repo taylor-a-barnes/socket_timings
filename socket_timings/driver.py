@@ -1,8 +1,8 @@
 import sys
 #sys.path.insert(0, '../lib/mdi_build/molssi_driver_interface')
-sys.path.insert(0, '/Users/tbarnes/Documents/mdi/socket_timings/lib/mdi_build/molssi_driver_interface')
+#sys.path.insert(0, '/Users/tbarnes/Documents/mdi/socket_timings/lib/mdi_build/molssi_driver_interface')
 
-import mdi_python as mdi
+import mdi.mdi_python as mdi
 
 niterations = 10
 

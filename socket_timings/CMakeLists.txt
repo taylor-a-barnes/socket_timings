@@ -11,7 +11,8 @@ else()
    include_directories(${CMAKE_SOURCE_DIR}/STUBS_MPI/)
 endif()
 
-link_directories(${CMAKE_SOURCE_DIR}/../lib/mdi_build/molssi_driver_interface/)
+set( MDI_LOCATION ${CMAKE_SOURCE_DIR}/../lib/mdi_build/molssi_driver_interface/ )
+link_directories( ${MDI_LOCATION} )
 
 
 
@@ -163,3 +164,12 @@ target_link_libraries(zmq_server ${CMAKE_SOURCE_DIR}/../lib/zmq_build/lib/libzmq
 add_executable(zmq_client
            zmq_client.c)
 target_link_libraries(zmq_client ${CMAKE_SOURCE_DIR}/../lib/zmq_build/lib/libzmq.so.5)
+
+
+# copy MDI python files
+#configure_file(${MDI_LOCATION}/mdi_python.py ${CMAKE_CURRENT_BINARY_DIR}/mdi/mdi_python.py COPYONLY)
+#configure_file(${MDI_LOCATION}/__init__.py ${CMAKE_CURRENT_BINARY_DIR}/mdi/__init__.py COPYONLY)
+file(COPY ${MDI_LOCATION} DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/mdi)
+
+# copy socket_timings python files
+configure_file(${CMAKE_SOURCE_DIR}/driver.py ${CMAKE_CURRENT_BINARY_DIR}/driver.py COPYONLY)

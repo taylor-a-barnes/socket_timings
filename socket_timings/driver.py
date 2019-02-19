@@ -33,7 +33,7 @@ if world_rank == 0:
         name = mdi.MDI_Recv(mdi.MDI_NAME_LENGTH, mdi.MDI_CHAR, comm)
         print('Received connection: ' + str(name))
 
-        if name.strip() == 'PONG':
+        if name.strip() == 'PONG' or name.strip() == "PONG_F90":
             mm_comm = comm
         else:
             raise ValueError('Production code name not recognized')

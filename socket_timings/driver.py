@@ -15,11 +15,12 @@ else:
     mpi_world = None
 
 # initialize the socket
-print( "BEFORE: " + str(mpi_world) + " " + str(mpi_world.Get_rank()) )
 mdi.MDI_Init(sys.argv[2],None,mpi_world)
-mpi_world = mdi.MDI_Get_Intra_Code_MPI_Comm()
-print( "AFTER:  " + str(mpi_world) + " " + str(mpi_world.Get_rank()) )
-world_rank = mpi_world.Get_rank()
+if use_mpi4py:
+    mpi_world = mdi.MDI_Get_Intra_Code_MPI_Comm()
+    world_rank = mpi_world.Get_rank()
+else:
+    world_rank = 0
 
 # connect to the production codes
 ncodes = 1

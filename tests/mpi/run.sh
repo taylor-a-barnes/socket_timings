@@ -1,1 +1,1 @@
-mpirun -n 2 ../../build/main
+mpiexec -n 2 ../../build/main

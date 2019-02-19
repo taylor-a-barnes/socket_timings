@@ -173,3 +173,4 @@ file(COPY ${MDI_LOCATION} DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/mdi)
 
 # copy socket_timings python files
 configure_file(${CMAKE_SOURCE_DIR}/driver.py ${CMAKE_CURRENT_BINARY_DIR}/driver.py COPYONLY)
+configure_file(${CMAKE_SOURCE_DIR}/production.py ${CMAKE_CURRENT_BINARY_DIR}/production.py COPYONLY)

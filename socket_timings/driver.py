@@ -1,4 +1,5 @@
 import sys
+import time
 import mdi.mdi_python as mdi
 try:
     from mpi4py import MPI
@@ -6,7 +7,7 @@ try:
 except ImportError:
     use_mpi4py = False
 
-niterations = 10
+niterations = 100000
 
 # initialize MPI
 if use_mpi4py:
@@ -40,14 +41,22 @@ if world_rank == 0:
 
 
 if world_rank == 0:
+
+    initial_time = time.clock();
+
     for iiter in range(niterations):
 
         # get the MM energy
         mdi.MDI_Send_Command("<NAME", comm)
         name = mdi.MDI_Recv(mdi.MDI_NAME_LENGTH, mdi.MDI_CHAR, comm)
 
-        print("Iteration: " + str(iiter+1) + "   " + name )
+        if iiter % 1000 == 0:
+            print("Iteration: " + str(iiter) + "   " + name )
 
 
     # close the production codes
     mdi.MDI_Send_Command("EXIT", mm_comm)
+
+    wall_time = time.clock() - initial_time
+    print("Ping-pong time: " + str(wall_time))
+    print("   us: " + str(1000000.0*wall_time/(1.0*(2*niterations))))

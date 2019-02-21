@@ -7,7 +7,7 @@ USE mdi,              ONLY : MDI_Init, MDI_Send, MDI_CHAR, MDI_NAME_LENGTH, &
 
 IMPLICIT NONE
 
-   INTEGER :: niter = 100
+   INTEGER :: niter = 100000
    INTEGER :: mpi_ptr
    INTEGER :: world_comm, world_rank
    INTEGER :: i, ierr
@@ -15,6 +15,7 @@ IMPLICIT NONE
    CHARACTER(len=:), ALLOCATABLE :: message
    CHARACTER(len=1024) :: arg
    CHARACTER(len=1024) :: mdi_options
+   DOUBLE PRECISION :: initial_time, final_time
 
    ALLOCATE( character(MDI_NAME_LENGTH) :: message )
 
@@ -47,16 +48,23 @@ IMPLICIT NONE
    call MPI_Comm_rank( world_comm, mpi_ptr, ierr );
    world_rank = mpi_ptr
 
+   CALL CPU_TIME(initial_time)
    DO i=1, niter
       IF( world_rank.eq.0 ) THEN
          call MDI_Send_Command("<NAME", comm, ierr)
          call MDI_Recv(message, MDI_NAME_LENGTH, MDI_CHAR, comm, ierr)
 
-         WRITE(6,*)'Iteration: ', i, message
+         !WRITE(6,*)'Iteration: ', i, message
+         IF ( MODULO(i, 1000).eq.0 ) THEN
+            WRITE(6,*)'Iteration: ',i,message
+         END IF
       END IF
    END DO
+   CALL CPU_TIME(final_time)
 
    IF( world_rank.eq.0 ) THEN
+      WRITE(6,*)'Ping-pong time: ',final_time-initial_time
+      WRITE(6,*)'   us: ',1000000.d0*(final_time-initial_time)/(DBLE(2*niter))
       call MDI_Send_Command("EXIT", comm, ierr)
    END IF
 

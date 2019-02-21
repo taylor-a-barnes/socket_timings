@@ -56,6 +56,10 @@ IMPLICIT NONE
       END IF
    END DO
 
+   IF( world_rank.eq.0 ) THEN
+      call MDI_Send_Command("EXIT", comm, ierr)
+   END IF
+
    call MPI_Barrier( world_comm, ierr )
 
 END PROGRAM MDI_DRIVER_F90

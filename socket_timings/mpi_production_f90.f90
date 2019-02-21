@@ -55,7 +55,7 @@ IMPLICIT NONE
          SELECT CASE( TRIM(message) )
          CASE( "<NAME" )
             call MDI_Send("PONG_F90", MDI_NAME_LENGTH, MDI_CHAR, comm, ierr)
-         CASE( "<EXIT" )
+         CASE( "EXIT" )
             EXIT
          END SELECT
       END IF

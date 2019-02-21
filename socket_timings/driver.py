@@ -2,12 +2,19 @@ import sys
 import time
 import mdi.mdi_python as mdi
 try:
+    import numpy
+    use_numpy = True
+except ImportError:
+    use_numpy = False
+try:
     from mpi4py import MPI
     use_mpi4py = True
 except ImportError:
     use_mpi4py = False
 
 niterations = 100000
+natoms = 10
+get_coords = False
 
 # initialize MPI
 if use_mpi4py:
@@ -50,6 +57,14 @@ if world_rank == 0:
         mdi.MDI_Send_Command("<NAME", comm)
         name = mdi.MDI_Recv(mdi.MDI_NAME_LENGTH, mdi.MDI_CHAR, comm)
 
+        # get the MM coordinates
+        if get_coords:
+            mdi.MDI_Send_Command("<COORDS", comm)
+            if use_numpy:
+                coords = mdi.MDI_Recv(3*natoms, mdi.MDI_DOUBLE_NUMPY, comm)
+            else:
+                coords = mdi.MDI_Recv(3*natoms, mdi.MDI_DOUBLE, comm)
+
         if iiter % 1000 == 0:
             print("Iteration: " + str(iiter) + "   " + name )
 
@@ -58,5 +73,7 @@ if world_rank == 0:
     mdi.MDI_Send_Command("EXIT", mm_comm)
 
     wall_time = time.clock() - initial_time
+    if get_coords:
+        print( str(coords) )
     print("Ping-pong time: " + str(wall_time))
     print("   us: " + str(1000000.0*wall_time/(1.0*(2*niterations))))

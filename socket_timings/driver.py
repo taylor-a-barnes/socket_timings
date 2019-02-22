@@ -23,7 +23,7 @@ else:
     mpi_world = None
 
 # initialize the socket
-mdi.MDI_Init(sys.argv[2],None,mpi_world)
+mdi.MDI_Init(sys.argv[2],mpi_world)
 if use_mpi4py:
     mpi_world = mdi.MDI_Get_Intra_Code_MPI_Comm()
     world_rank = mpi_world.Get_rank()

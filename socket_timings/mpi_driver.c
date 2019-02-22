@@ -39,7 +39,7 @@ int main(int argc, char **argv) {
 
   // Initialize the MDI driver
   world_comm = MPI_COMM_WORLD;
-  int ret = MDI_Init(argv[iarg+1], NULL, &world_comm);
+  int ret = MDI_Init(argv[iarg+1], &world_comm);
 
   // Accept a communicator from the production code
   int comm = MDI_Accept_Communicator();

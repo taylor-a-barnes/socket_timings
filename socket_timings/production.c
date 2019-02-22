@@ -8,7 +8,7 @@ int main() {
   double cpu_time;
 
   // Initialize the MDI driver
-  int ret = MDI_Init("-role ENGINE -name MM -method TCP -port 8021 -hostname knl3.sirius.local.net", NULL, NULL);
+  int ret = MDI_Init("-role ENGINE -name MM -method TCP -port 8021 -hostname knl3.sirius.local.net", NULL);
   int comm = MDI_Accept_Communicator();
 
   start = clock();

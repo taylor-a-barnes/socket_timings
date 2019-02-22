@@ -19,7 +19,7 @@ int main(int argc, char **argv) {
   // Initialize the MDI driver
   //int ret = MDI_Init(8021);
   //int ret = MDI_Listen("TCP","8021",NULL);
-  int ret = MDI_Init(argv[1], NULL, NULL);
+  int ret = MDI_Init(argv[1], NULL);
 
   // Accept a communicator from the production code
   int comm = MDI_Accept_Communicator();

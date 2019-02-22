@@ -36,7 +36,7 @@ IMPLICIT NONE
 
    ! Initialize the MDI driver
    world_comm = MPI_COMM_WORLD
-   call MDI_Init( mdi_options, c_null_ptr, world_comm, ierr)
+   call MDI_Init( mdi_options, world_comm, ierr)
 
    ! Accept the communicator to the production code
    call MDI_Accept_Communicator(comm)

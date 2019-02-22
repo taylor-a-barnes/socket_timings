@@ -167,7 +167,7 @@ target_link_libraries(zmq_client ${CMAKE_SOURCE_DIR}/../lib/zmq_build/lib/libzmq
 
 
 # copy MDI python files
-#configure_file(${MDI_LOCATION}/mdi_python.py ${CMAKE_CURRENT_BINARY_DIR}/mdi/mdi_python.py COPYONLY)
+#configure_file(${MDI_LOCATION}/mdi.py ${CMAKE_CURRENT_BINARY_DIR}/mdi/mdi.py COPYONLY)
 #configure_file(${MDI_LOCATION}/__init__.py ${CMAKE_CURRENT_BINARY_DIR}/mdi/__init__.py COPYONLY)
 file(COPY ${MDI_LOCATION} DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/mdi)
 

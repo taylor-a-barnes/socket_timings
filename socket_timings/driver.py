@@ -1,6 +1,6 @@
 import sys
 import time
-import mdi.mdi_python as mdi
+import mdi.mdi as mdi
 try:
     import numpy
     use_numpy = True

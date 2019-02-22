@@ -22,12 +22,11 @@ int main(int argc, char **argv) {
   }
 
   // Initialize the MDI driver
-  //int comm = MDI_Request_Connection("MPI", "MM", NULL);
   world_comm = MPI_COMM_WORLD;
   int ret = MDI_Init(argv[iarg+1], NULL, &world_comm);
 
-  // Accept the connection to the driver code
-  int comm = MDI_Accept_Connection();
+  // Accept the communicator to the driver code
+  int comm = MDI_Accept_Communicator();
 
   // Note: For reasons I don't fully understand, the pointer returned by MPI
   // doesn't seem to persist throughout the test.

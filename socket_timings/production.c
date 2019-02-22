@@ -8,8 +8,7 @@ int main() {
   double cpu_time;
 
   // Initialize the MDI driver
-  //int comm = MDI_Open(1, 8021, "knl3.sirius.local.net");
-  int comm = MDI_Request_Connection("TCP", "knl3.sirius.local.net:8021", NULL);
+  int comm = MDI_Request_Communicator("TCP", "knl3.sirius.local.net:8021", NULL);
 
   start = clock();
 

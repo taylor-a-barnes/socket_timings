@@ -21,8 +21,8 @@ int main(int argc, char **argv) {
   //int ret = MDI_Listen("TCP","8021",NULL);
   int ret = MDI_Init(argv[1], NULL, NULL);
 
-  // Accept a connection from the production code
-  int comm = MDI_Accept_Connection();
+  // Accept a communicator from the production code
+  int comm = MDI_Accept_Communicator();
 
   start = clock();
 

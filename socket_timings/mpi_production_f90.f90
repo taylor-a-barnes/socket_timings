@@ -3,7 +3,7 @@ PROGRAM MDI_DRIVER_F90
 USE mpi
 USE ISO_C_binding
 USE mdi,              ONLY : MDI_Send, MDI_CHAR, MDI_NAME_LENGTH, &
-     MDI_Accept_Connection, MDI_Recv_Command, MDI_Recv, MDI_MPI, MDI_MPI_COMM, MDI_Init
+     MDI_Accept_Communicator, MDI_Recv_Command, MDI_Recv, MDI_MPI, MDI_MPI_COMM, MDI_Init
 
 IMPLICIT NONE
 
@@ -36,11 +36,10 @@ IMPLICIT NONE
 
    ! Initialize the MDI driver
    world_comm = MPI_COMM_WORLD
-   !call MDI_Request_Connection( "MPI", "MM", MPI_COMM_WORLD, comm )
    call MDI_Init( mdi_options, c_null_ptr, world_comm, ierr)
 
-   ! Accept the connection to the production code
-   call MDI_Accept_Connection(comm)
+   ! Accept the communicator to the production code
+   call MDI_Accept_Communicator(comm)
 
    !call MDI_MPI_Comm( world_comm, ierr )
    call MPI_Comm_rank( world_comm, mpi_ptr, ierr );

@@ -34,12 +34,12 @@ else:
 ncodes = 1
 if world_rank == 0:
     for icode in range(ncodes):
-        comm = mdi.MDI_Accept_Connection()
+        comm = mdi.MDI_Accept_Communicator()
 
         # get the name of the code
         mdi.MDI_Send_Command("<NAME", comm)
         name = mdi.MDI_Recv(mdi.MDI_NAME_LENGTH, mdi.MDI_CHAR, comm)
-        print('Received connection: ' + str(name))
+        print('Received communicator: ' + str(name))
 
         if name.strip() == 'PONG' or name.strip() == "PONG_F90":
             mm_comm = comm

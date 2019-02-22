@@ -41,8 +41,8 @@ int main(int argc, char **argv) {
   world_comm = MPI_COMM_WORLD;
   int ret = MDI_Init(argv[iarg+1], NULL, &world_comm);
 
-  // Accept a connection from the production code
-  int comm = MDI_Accept_Connection();
+  // Accept a communicator from the production code
+  int comm = MDI_Accept_Communicator();
 
   // Note: For reasons I don't fully understand, the pointer returned by MPI
   // doesn't seem to persist throughout the test.

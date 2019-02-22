@@ -27,8 +27,8 @@ if use_mpi4py:
 else:
     world_rank = 0
 
-# Accept the connection to the driver code
-comm = mdi.MDI_Accept_Connection()
+# Accept a communicator to the driver code
+comm = mdi.MDI_Accept_Communicator()
 
 coords = [ 0.1*icoord for icoord in xrange(3*natoms) ]
 if use_numpy:

@@ -16,7 +16,7 @@ void mdi_ping_pong(int comm) {
 int main(int argc, char **argv) {
   clock_t start, end;
   double cpu_time;
-  int niter = 100000;
+  int niter = 10000;
   int mpi_ptr;
   int world_rank;
   MPI_Comm world_comm;

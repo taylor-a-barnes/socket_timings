@@ -7,7 +7,7 @@ USE mdi,              ONLY : MDI_Init, MDI_Send, MDI_CHAR, MDI_NAME_LENGTH, &
 
 IMPLICIT NONE
 
-   INTEGER :: niter = 100000
+   INTEGER :: niter = 10000
    INTEGER :: mpi_ptr
    INTEGER :: world_comm, world_rank
    INTEGER :: i, ierr

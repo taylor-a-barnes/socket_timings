@@ -31,11 +31,10 @@ int main(int argc, char **argv) {
     perror("The -mdi argument was not provided");
     return -1;
   }
-  /*
-  for (i=0; i<argc; i++) {
-    printf("argument: %i (%s)\n",i,argv[i]);
-  }
-  */
+
+  // Get the Angstrom-Bohr conversion factor
+  double conversion_factor = MDI_Conversion_Factor("Angstrom","Bohr");
+  printf("Conversion factor: %f\n",conversion_factor);
 
   // Initialize the MDI driver
   world_comm = MPI_COMM_WORLD;

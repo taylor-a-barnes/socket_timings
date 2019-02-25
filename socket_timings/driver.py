@@ -22,6 +22,9 @@ if use_mpi4py:
 else:
     mpi_world = None
 
+# get the Angstrom to Bohr conversion factor
+conversion_factor = mdi.MDI_Conversion_Factor("Angstrom","Bohr")
+
 # initialize the socket
 mdi.MDI_Init(sys.argv[2],mpi_world)
 if use_mpi4py:

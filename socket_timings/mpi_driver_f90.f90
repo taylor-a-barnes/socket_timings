@@ -3,7 +3,7 @@ PROGRAM MDI_DRIVER_F90
 USE mpi
 USE ISO_C_binding
 USE mdi,              ONLY : MDI_Init, MDI_Send, MDI_CHAR, MDI_NAME_LENGTH, &
-     MDI_Accept_Communicator, MDI_Send_Command, MDI_Recv
+     MDI_Accept_Communicator, MDI_Send_Command, MDI_Recv, MDI_Conversion_Factor
 
 IMPLICIT NONE
 
@@ -16,6 +16,7 @@ IMPLICIT NONE
    CHARACTER(len=1024) :: arg
    CHARACTER(len=1024) :: mdi_options
    DOUBLE PRECISION :: initial_time, final_time
+   DOUBLE PRECISION :: conversion_factor
 
    ALLOCATE( character(MDI_NAME_LENGTH) :: message )
 
@@ -35,6 +36,10 @@ IMPLICIT NONE
 
       i = i+1
    END DO
+
+   ! Get the Angstrom to Bohr conversion factor
+   CALL MDI_Conversion_Factor("Angstrom","Bohr",conversion_factor)
+   WRITE(6,*)'Conversion Factor: ',conversion_factor
 
    ! Initialize the MDI driver
    world_comm = MPI_COMM_WORLD

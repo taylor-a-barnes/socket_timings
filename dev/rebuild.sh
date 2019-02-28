@@ -15,7 +15,6 @@ mkdir mdi_build
 cd mdi_build
 cmake ../mdi
 make
-cp ../mdi/molssi_driver_interface/mdi.h molssi_driver_interface
 cd ../
 
 cd ../

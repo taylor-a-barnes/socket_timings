@@ -10,7 +10,6 @@ mkdir mdi_build
 cd mdi_build
 cmake -Dmpi=OFF ../mdi
 make
-cp ../mdi/molssi_driver_interface/mdi.h molssi_driver_interface
 cd ../
 
 rm -rf zmq_build

@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <time.h>
-#include "../lib/mdi_build/molssi_driver_interface/mdi.h"
+#include "../lib/mdi_build/MDI_Library/mdi.h"
 
 void mdi_ping_pong(int comm) {
   char message[MDI_NAME_LENGTH];

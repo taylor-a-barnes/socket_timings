@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
-#include "../lib/mdi_build/molssi_driver_interface/mdi.h"
+#include "../lib/mdi_build/MDI_Library/mdi.h"
 
 int main() {
   clock_t start, end;

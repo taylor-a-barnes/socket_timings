@@ -11,7 +11,7 @@ else()
    include_directories(${CMAKE_SOURCE_DIR}/STUBS_MPI/)
 endif()
 
-set( MDI_LOCATION ${CMAKE_SOURCE_DIR}/../lib/mdi_build/molssi_driver_interface/ )
+set( MDI_LOCATION ${CMAKE_SOURCE_DIR}/../lib/mdi_build/MDI_Library/ )
 link_directories( ${MDI_LOCATION} )
 
 
@@ -118,7 +118,7 @@ add_executable(mpi_driver_f90
 target_link_libraries(mpi_driver_f90 mdi
                                  ${MPI_LIBRARIES})
 target_include_directories(mpi_driver_f90 PUBLIC
-   ${CMAKE_SOURCE_DIR}/../lib/mdi_build/molssi_driver_interface/
+   ${CMAKE_SOURCE_DIR}/../lib/mdi_build/MDI_Library/
    ${MPI_INCLUDE_PATH} )
 
 if(MPI_COMPILE_FLAGS)
@@ -137,7 +137,7 @@ add_executable(mpi_production_f90
 target_link_libraries(mpi_production_f90 mdi
                                  ${MPI_LIBRARIES})
 target_include_directories(mpi_production_f90 PUBLIC
-   ${CMAKE_SOURCE_DIR}/../lib/mdi_build/molssi_driver_interface/
+   ${CMAKE_SOURCE_DIR}/../lib/mdi_build/MDI_Library/
    ${MPI_INCLUDE_PATH} )
 
 if(MPI_COMPILE_FLAGS)

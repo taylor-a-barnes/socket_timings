@@ -2,7 +2,7 @@
 #include <string.h>
 #include <time.h>
 #include <mpi.h>
-#include "../lib/mdi_build/molssi_driver_interface/mdi.h"
+#include "../lib/mdi_build/MDI_Library/mdi.h"
 
 int main(int argc, char **argv) {
   clock_t start, end;

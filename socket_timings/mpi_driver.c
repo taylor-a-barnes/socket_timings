@@ -33,7 +33,7 @@ int main(int argc, char **argv) {
   }
 
   // Get the Angstrom-Bohr conversion factor
-  double conversion_factor = MDI_Conversion_Factor("Angstrom","Bohr");
+  double conversion_factor = MDI_Conversion_Factor("angstrom","bohr");
   printf("Conversion factor: %f\n",conversion_factor);
 
   // Initialize the MDI driver

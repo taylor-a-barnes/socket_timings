@@ -38,7 +38,7 @@ IMPLICIT NONE
    END DO
 
    ! Get the Angstrom to Bohr conversion factor
-   CALL MDI_Conversion_Factor("Angstrom","Bohr",conversion_factor)
+   CALL MDI_Conversion_Factor("angstrom","bohr",conversion_factor)
    WRITE(6,*)'Conversion Factor: ',conversion_factor
 
    ! Initialize the MDI driver

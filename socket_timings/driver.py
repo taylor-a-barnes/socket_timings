@@ -23,7 +23,7 @@ else:
     mpi_world = None
 
 # get the Angstrom to Bohr conversion factor
-conversion_factor = mdi.MDI_Conversion_Factor("Angstrom","Bohr")
+conversion_factor = mdi.MDI_Conversion_Factor("angstrom","bohr")
 print("Conversion Factor: " + str(conversion_factor))
 
 # initialize the socket

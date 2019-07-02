@@ -1,5 +1,4 @@
 import sys
-#import mdi.mdi as mdi
 import mdi
 try:
     import numpy
@@ -31,7 +30,7 @@ else:
 # Accept a communicator to the driver code
 comm = mdi.MDI_Accept_Communicator()
 
-coords = [ 0.1*icoord for icoord in xrange(3*natoms) ]
+coords = [ 0.1*icoord for icoord in range(3*natoms) ]
 if use_numpy:
     numpy_coords = numpy.array( coords, dtype='float64' )
 

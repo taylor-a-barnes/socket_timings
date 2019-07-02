@@ -1,5 +1,6 @@
 import sys
-import mdi.mdi as mdi
+#import mdi.mdi as mdi
+import mdi
 try:
     import numpy
     use_numpy = True

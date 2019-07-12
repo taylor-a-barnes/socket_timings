@@ -73,6 +73,8 @@ IMPLICIT NONE
 
    call MPI_Barrier( world_comm, ierr )
 
+   call MPI_Finalize( ierr )
+
 END PROGRAM MDI_DRIVER_F90
 
 

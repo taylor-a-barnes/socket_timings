@@ -45,9 +45,9 @@ IMPLICIT NONE
    world_rank = mpi_ptr
 
    ! respond to the driver's commands
-   response_loop: DO
+   IF ( world_rank.eq.0 )THEN
+      response_loop: DO
 
-      IF( world_rank.eq.0 )THEN
          call MDI_Recv_Command(message, comm, ierr)
 
          SELECT CASE( TRIM(message) )
@@ -56,8 +56,12 @@ IMPLICIT NONE
          CASE( "EXIT" )
             EXIT
          END SELECT
-      END IF
 
-   END DO response_loop
+      END DO response_loop
+   END IF
+
+   call MPI_Barrier( world_comm, ierr )
+
+   call MPI_Finalize( ierr )
 
 END PROGRAM MDI_DRIVER_F90

@@ -38,7 +38,8 @@ int main(int argc, char **argv) {
   start = clock();
 
   char command[MDI_COMMAND_LENGTH];
-  while ( 1 ) {
+  int continue_listening = 1;
+  while ( world_rank == 0 && continue_listening == 1 ) {
     if ( world_rank == 0 ) {
 
       MDI_Recv_Command(command, comm);
@@ -47,7 +48,7 @@ int main(int argc, char **argv) {
 	MDI_Send("PONG", MDI_NAME_LENGTH, MDI_CHAR, comm);
       }
       else if ( strcmp(command, "EXIT") == 0 ) {
-	return 0;
+	continue_listening = 0;
       }
       else {
 	perror("Error in MDI_Production: MDI command not recognized");
@@ -58,6 +59,10 @@ int main(int argc, char **argv) {
   end = clock();
   cpu_time = ((double) (end - start)) / CLOCKS_PER_SEC;
   printf("Ping-pong time: %f\n",cpu_time);
+
+  MPI_Barrier(world_comm);
+
+  MPI_Finalize();
   
   return 0;
 }

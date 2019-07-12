@@ -75,5 +75,7 @@ int main(int argc, char **argv) {
 
   MPI_Barrier(world_comm);
 
+  MPI_Finalize();
+
   return 0;
 }

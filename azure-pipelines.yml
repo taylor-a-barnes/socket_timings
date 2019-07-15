@@ -82,8 +82,7 @@ jobs:
                 -DCMAKE_CXX_COMPILER=clang-cl ^
                 -Dlanguage=Python ^
                 ../mdi
-          cmake --build . ^
-                -- -j %NUMBER_OF_PROCESSORS%
+          cmake --build .
           ls
           ls *
         displayName: "Building the MDI Library"
@@ -117,7 +116,8 @@ jobs:
           cd tests/tcp
           echo "Contents of current directory"
           ls
-          ./windows_test.sh
+          ../../build/mpi_driver -mdi "-role DRIVER -name driver -method TCP -port 8021" &
+          ../../build/mpi_production -mdi "-role ENGINE -name PONG -method TCP -hostname localhost -port 8021" &
         displayName: "Test the socket_timings code"
 
       # Configure

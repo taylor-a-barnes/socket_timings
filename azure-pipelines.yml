@@ -56,22 +56,9 @@ jobs:
                         numpy ^
                         pint ^
                         pybind11 ^
-                        pytest ^
-                        pytest-xdist ^
                         python=%PYTHON_VERSION% ^
-                        qcelemental ^
-                        qcengine
           conda list
         displayName: "Install conda packages"
-
-      # Install LLVM
-      # Note: LLVM distributed by conda is too old
-      - script: |
-          choco install llvm --version %LLVM_VERSION% --yes
-          set PATH=C:\Program Files\LLVM\bin;%PATH%
-          echo '##vso[task.setvariable variable=PATH]%PATH%'
-          clang-cl --version
-        displayName: "Install LLVM"
 
       # Install Intel OpenMP import library
       # NOTE: libiomp5md.lib is located in conda/win/$(mkl.version)
@@ -79,6 +66,22 @@ jobs:
           set LIB=$(Build.SourcesDirectory)\conda\win\$(mkl.version);%LIB%
           echo '##vso[task.setvariable variable=LIB]%LIB%'
         displayName: "Install Intel OpenMP import library"
+        
+      # Build the MDI Library
+      - script: | 
+          call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
+          ls
+          mkdir lib/mdi_build
+          cd lib/mdi_build
+          cmake -DCMAKE_C_COMPILER=clang-cl ^
+                -DCMAKE_CXX_COMPILER=clang-cl ^
+                -Dlanguage=Python ^
+                ../mdi
+          cmake --build . ^
+                -- -j %NUMBER_OF_PROCESSORS%
+          ls
+          ls *
+        displayName: "Building the MDI Library"
 
       # Configure
       - script: |

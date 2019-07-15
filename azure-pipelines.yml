@@ -56,7 +56,7 @@ jobs:
                         numpy ^
                         pint ^
                         pybind11 ^
-                        python=%PYTHON_VERSION% ^
+                        python=%PYTHON_VERSION%
         displayName: "Install conda packages"
 
       # Install Intel OpenMP import library
@@ -99,7 +99,7 @@ jobs:
                 -- -j %NUMBER_OF_PROCESSORS%
           ls
           ls *
-        displayName: "Building the MDI Library"
+        displayName: "Building the socket_timings code"
         workingDirectory: $(Build.BinariesDirectory)
 
       # Configure

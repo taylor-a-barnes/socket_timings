@@ -70,8 +70,14 @@ jobs:
       - script: | 
           call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
           ls
-          mkdir lib/mdi_build
-          cd lib/mdi_build
+          cd lib
+          echo "Contents of lib"
+          ls
+          mkdir mdi_build
+          cd mdi_build
+          echo "Contents of ../mdi"
+          ls ../mdi
+          echo "Calling cmake"
           cmake -DCMAKE_C_COMPILER=clang-cl ^
                 -DCMAKE_CXX_COMPILER=clang-cl ^
                 -Dlanguage=Python ^
@@ -84,23 +90,26 @@ jobs:
         
       # Build the socket_timings code
       - script: |
+          echo "Contents of current directory:"
           ls
+          echo "End of contents of current directory"
           mkdir build
           cd build
+          echo "Contents of upper directory"
+          ls ../
           cmake -DCMAKE_C_COMPILER=clang-cl ^
                 -DCMAKE_CXX_COMPILER=clang-cl ^
                 -Dlanguage=Python ^
                 ../socket_timings
           cmake --build . ^
-                --target mpi_driver
+                --target mpi_driver ^
                 -- -j %NUMBER_OF_PROCESSORS%
           cmake --build . ^
-                --target mpi_production
+                --target mpi_production ^
                 -- -j %NUMBER_OF_PROCESSORS%
           ls
           ls *
         displayName: "Building the socket_timings code"
-        workingDirectory: $(Build.BinariesDirectory)
 
       # Configure
       - script: |

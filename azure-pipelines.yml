@@ -102,14 +102,23 @@ jobs:
                 -Dlanguage=Python ^
                 ../socket_timings
           cmake --build . ^
-                --target mpi_driver ^
-                -- -j %NUMBER_OF_PROCESSORS%
+                --target mpi_driver
           cmake --build . ^
-                --target mpi_production ^
-                -- -j %NUMBER_OF_PROCESSORS%
+                --target mpi_production
           ls
           ls *
         displayName: "Building the socket_timings code"
+
+      # Test the socket_timings code
+      - script: |
+          echo "Contents of current directory:"
+          ls
+          echo "End of contents of current directory"
+          cd tests/tcp
+          echo "Contents of current directory"
+          ls
+          ./windows_test.sh
+        displayName: "Test the socket_timings code"
 
       # Configure
       - script: |

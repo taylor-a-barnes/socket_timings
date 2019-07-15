@@ -57,7 +57,6 @@ jobs:
                         pint ^
                         pybind11 ^
                         python=%PYTHON_VERSION% ^
-          conda list
         displayName: "Install conda packages"
 
       # Install Intel OpenMP import library
@@ -82,6 +81,26 @@ jobs:
           ls
           ls *
         displayName: "Building the MDI Library"
+        
+      # Build the socket_timings code
+      - script: |
+          ls
+          mkdir build
+          cd build
+          cmake -DCMAKE_C_COMPILER=clang-cl ^
+                -DCMAKE_CXX_COMPILER=clang-cl ^
+                -Dlanguage=Python ^
+                ../socket_timings
+          cmake --build . ^
+                --target mpi_driver
+                -- -j %NUMBER_OF_PROCESSORS%
+          cmake --build . ^
+                --target mpi_production
+                -- -j %NUMBER_OF_PROCESSORS%
+          ls
+          ls *
+        displayName: "Building the MDI Library"
+        workingDirectory: $(Build.BinariesDirectory)
 
       # Configure
       - script: |

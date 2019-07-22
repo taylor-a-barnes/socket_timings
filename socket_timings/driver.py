@@ -14,7 +14,7 @@ except ImportError:
 
 print("Start of driver code")
 
-return
+sys.exit()
 
 niterations = 10000
 natoms = 10

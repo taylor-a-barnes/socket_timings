@@ -121,7 +121,11 @@ jobs:
           cd build
           echo "Contents of current directory"
           ls
-          pythonw.exe driver.py -mdi "-role DRIVER -name driver -method TCP -port 8021"
-          pythonw.exe production.py -mdi "-role ENGINE -name PONG -method TCP -hostname localhost -port 8021"
-          timeout 20
+          pythonw.exe driver.py -mdi "-role DRIVER -name driver -method TCP -port 8021 -out dout"
+          pythonw.exe production.py -mdi "-role ENGINE -name PONG -method TCP -hostname localhost -port 8021 -out pout"
+	  echo "============== dout"
+	  cat dout
+	  echo "============== pout"
+	  cat pout
+          timeout 5
         displayName: "Test the socket_timings code"

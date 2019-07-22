@@ -13,7 +13,7 @@ except ImportError:
 
 print("Start of production code")
 
-return
+sys.exit()
 
 natoms = 10
 

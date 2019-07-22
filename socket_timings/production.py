@@ -13,6 +13,8 @@ except ImportError:
 
 print("Start of production code")
 
+return
+
 natoms = 10
 
 # initialize MPI

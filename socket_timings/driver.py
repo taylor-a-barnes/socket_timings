@@ -14,6 +14,8 @@ except ImportError:
 
 print("Start of driver code")
 
+return
+
 niterations = 10000
 natoms = 10
 get_coords = False

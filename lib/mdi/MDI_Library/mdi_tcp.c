@@ -165,6 +165,14 @@ int tcp_request_connection(int port, char* hostname_ptr) {
       ret = connect(sockfd, addr->ai_addr, addr->ai_addrlen);
       if (ret < 0 ) {
 #ifdef _WIN32
+	////
+	printf("C errors: %d\n",ret);
+	printf("C errors1: %d %d %d %d\n",WSANOTINITIALISED,WSAENETDOWN,WSAEADDRINUSE,WSAEINTR);
+	printf("C errors2: %d %d %d %d\n",WSAEINPROGRESS,WSAEALREADY,WSAEADDRNOTAVAIL,WSAEAFNOSUPPORT);
+	printf("C errors3: %d %d %d %d\n",WSAECONNREFUSED,WSAEFAULT,WSAEINVAL,WSAEISCONN);
+	printf("C errors4: %d %d %d %d\n",WSAENETUNREACH,WSAEHOSTUNREACH,WSAENOBUFS,WSAENOTSOCK);
+	printf("C errors5: %d %d %d\n",WSAETIMEDOUT,WSAEWOULDBLOCK,WSAEACCES);
+	////
         if ( errno == WSAECONNREFUSED ) {
           // close the socket, so that a new one can be created
           ret = closesocket(sockfd);

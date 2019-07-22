@@ -121,8 +121,14 @@ jobs:
           cd build
           echo "Contents of current directory"
           ls
+	  echo "Getting local hostname"
+	  hostname > my_hostname
+	  set /p hostvar= < testh
+	  echo "Local hostname is %hostvar%"
           pythonw.exe driver.py -mdi "-role DRIVER -name driver -method TCP -port 8021 -out dout"
-          pythonw.exe production.py -mdi "-role ENGINE -name PONG -method TCP -hostname localhost -port 8021 -out pout"
+          pythonw.exe production.py -mdi "-role ENGINE -name PONG -method TCP -hostname %hostvar% -port 8021 -out pout"
+	  echo "============== ls"
+	  ls
           echo "============== dout"
           cat dout
           echo "============== pout"

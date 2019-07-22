@@ -94,6 +94,7 @@ jobs:
         
       # Build the socket_timings code
       - script: |
+          call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
           echo "Contents of current directory:"
           ls
           echo "End of contents of current directory"
@@ -115,6 +116,7 @@ jobs:
 
       # Test the socket_timings code
       - script: |
+          call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
           echo "Contents of current directory:"
           ls
           echo "End of contents of current directory"
@@ -125,8 +127,8 @@ jobs:
           hostname > my_hostname
           set /p hostvar= < my_hostname
           echo "Local hostname is %hostvar%"
-          pythonw.exe driver.py -mdi "-role DRIVER -name driver -method TCP -port 8021 -out dout"
-          pythonw.exe production.py -mdi "-role ENGINE -name PONG -method TCP -hostname %hostvar% -port 8021 -out pout"
+          START /B "" python driver.py -mdi "-role DRIVER -name driver -method TCP -port 8021 -out dout"
+          START /B "" python production.py -mdi "-role ENGINE -name PONG -method TCP -hostname %hostvar% -port 8021 -out pout"
           echo "============== ls"
           ls
           echo "============== dout"

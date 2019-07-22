@@ -48,11 +48,22 @@ int tcp_listen(int port) {
   struct sockaddr_in serv_addr;
   int reuse_value = 1;
 
+#ifdef _WIN32
+  // initialize Winsock
+  WSADATA wsa_data;
+  ret = WSAStartup(MAKEWORD(2,2), &wsa_data);
+#endif
+
   // create the socket
   sockfd = socket(AF_INET, SOCK_STREAM, 0);
   if (sockfd < 0) {
     ////
-    printf("tcp_listen sockfd: %d\n",sockfd);
+    printf("tcp_listen sockfd: %d\n",sockfd); 
+#ifdef _WIN32
+    printf("s errors:  %d %d %d %d\n",WSANOTINITIALISED,WSAENETDOWN,WSAEAFNOSUPPORT,WSAEINPROGRESS);
+    printf("s errors2: %d %d %d %d\n",WSAEMFILE,WSAEINVAL,WSAEINVALIDPROVIDER,WSAEINVALIDPROCTABLE);
+    printf("s errors3: %d %d %d %d %d\n",WSAENOBUFS,WSAEPROTONOSUPPORT,WSAEPROTOTYPE,WSAEPROVIDERFAILEDINIT,WSAESOCKTNOSUPPORT);
+#endif
     ////
     mdi_error("Could not create socket in tcp_listen");
   }
@@ -101,6 +112,12 @@ int tcp_listen(int port) {
  */
 int tcp_request_connection(int port, char* hostname_ptr) {
   int ret, sockfd;
+
+#ifdef _WIN32
+  // initialize Winsock
+  WSADATA wsa_data;
+  ret = WSAStartup(MAKEWORD(2,2), &wsa_data);
+#endif
 
   struct sockaddr_in driver_address;
   struct hostent* host_ptr;

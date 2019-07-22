@@ -148,7 +148,7 @@ int tcp_request_connection(int port, char* hostname_ptr) {
   // if the connection is refused, try again
   //   this allows the production code to start before the driver
   int try_connect = 1;
-  printf("Trying to connect to the driver")
+  printf("Trying to connect to the driver");
   while (try_connect == 1) {
 
     // loop over all addresses found in getaddrinfo
@@ -156,7 +156,7 @@ int tcp_request_connection(int port, char* hostname_ptr) {
 
       // open the socket
       sockfd = socket(addr->ai_family, addr->ai_socktype, addr->ai_protocol);
-      printf("Opened a socket: %d\n",sockfd)
+      printf("Opened a socket: %d\n",sockfd);
       if (sockfd < 0) {
 	////
 	printf("tcp_request_connection sockfd: %d\n",sockfd);

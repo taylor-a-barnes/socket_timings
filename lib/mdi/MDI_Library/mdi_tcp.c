@@ -51,7 +51,10 @@ int tcp_listen(int port) {
   // create the socket
   sockfd = socket(AF_INET, SOCK_STREAM, 0);
   if (sockfd < 0) {
-    mdi_error("Could not create socket");
+    ////
+    printf("tcp_listen sockfd: %d\n",sockfd);
+    ////
+    mdi_error("Could not create socket in tcp_listen");
   }
 
   // ensure that the socket is closed on sigint
@@ -112,6 +115,15 @@ int tcp_request_connection(int port, char* hostname_ptr) {
   hints.ai_protocol = IPPROTO_TCP;
   ret = getaddrinfo(hostname_ptr, port_str, &hints, &addrs);
   if (ret != 0) {
+    ////
+    printf("hostname_ptr: %s\n",hostname_ptr);
+    printf("GAI return: %d\n",ret);
+#ifdef _WIN32
+    printf("GAI errors:  %d %d %d %d\n",WSA_NOT_ENOUGH_MEMORY,WSAEAFNOSUPPORT,WSAEINVAL,WSAESOCKTNOSUPPORT);
+    printf("GAI errors2: %d %d %d %d\n",WSAHOST_NOT_FOUND,WSANO_DATA,WSANO_RECOVERY,WSANOTINITIALISED);
+    printf("GAI errors3: %d %d\n",WSATRY_AGAIN,WSATYPE_NOT_FOUND);
+#endif
+    ////
     mdi_error("Error in getaddrinfo");
   }
 
@@ -127,7 +139,10 @@ int tcp_request_connection(int port, char* hostname_ptr) {
     // open the socket
       sockfd = socket(addr->ai_family, addr->ai_socktype, addr->ai_protocol);
       if (sockfd < 0) {
-        mdi_error("Could not create socket");
+	////
+	printf("tcp_request_connection sockfd: %d\n",sockfd);
+	////
+        mdi_error("Could not create socket in tcp_request_connection");
       }
 
       ret = connect(sockfd, addr->ai_addr, addr->ai_addrlen);

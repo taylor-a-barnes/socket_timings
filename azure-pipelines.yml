@@ -127,8 +127,8 @@ jobs:
           hostname > my_hostname
           set /p hostvar= < my_hostname
           echo "Local hostname is %hostvar%"
-          START /B "" python driver.py -mdi "-role DRIVER -name driver -method TCP -port 8021 -out dout"
-          START /B "" python production.py -mdi "-role ENGINE -name PONG -method TCP -hostname %hostvar% -port 8021 -out pout"
+          START /B "" python driver.py -mdi "-role DRIVER -name driver -method TCP -port 8021"
+          python production.py -mdi "-role ENGINE -name PONG -method TCP -hostname %hostvar% -port 8021"
           echo "============== ls"
           ls
           echo "============== dout"

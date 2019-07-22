@@ -175,10 +175,10 @@ int tcp_request_connection(int port, char* hostname_ptr) {
 	printf("C errors4: %d %d %d %d\n",WSAENETUNREACH,WSAEHOSTUNREACH,WSAENOBUFS,WSAENOTSOCK);
 	printf("C errors5: %d %d %d\n",WSAETIMEDOUT,WSAEWOULDBLOCK,WSAEACCES);
 	printf("Socket error: %d\n",SOCKET_ERROR);
-	int last_error = WSAGetLastError();
-	printf("LAST ERROR: %d\n",last_error);
 	////
-        if ( errno == WSAECONNREFUSED ) {
+        int sock_error = WSAGetLastError();
+	printf("LAST ERROR: %d\n",sock_error);
+        if ( sock_error == WSAECONNREFUSED ) {
           // close the socket, so that a new one can be created
           ret = closesocket(sockfd);
 #else

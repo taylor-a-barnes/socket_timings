@@ -80,11 +80,14 @@ jobs:
           echo "Contents of ../mdi"
           ls ../mdi
           echo "Calling cmake"
-          cmake -DCMAKE_C_COMPILER=clang-cl ^
+          cmake -G Ninja ^
+                -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ^
+                -DCMAKE_C_COMPILER=clang-cl ^
                 -DCMAKE_CXX_COMPILER=clang-cl ^
                 -Dlanguage=Python ^
                 ../mdi
-          cmake --build .
+          cmake --build . ^
+                --config %CMAKE_BUILD_TYPE%
           ls
           ls *
         displayName: "Building the MDI Library"

@@ -121,51 +121,6 @@ jobs:
           cd tests/tcp
           echo "Contents of current directory"
           ls
-          ../../build/mpi_driver -mdi "-role DRIVER -name driver -method TCP -port 8021" &
-          ../../build/mpi_production -mdi "-role ENGINE -name PONG -method TCP -hostname localhost -port 8021" &
+          python build\driver.py -mdi "-role DRIVER -name driver -method TCP -port 8021" &
+          python build\production.py -mdi "-role ENGINE -name PONG -method TCP -hostname localhost -port 8021" &
         displayName: "Test the socket_timings code"
-
-      # Configure
-      - script: |
-          setlocal EnableDelayedExpansion
-          call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
-          mkdir build & cd build
-          cmake -G Ninja ^
-                -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ^
-                -DCMAKE_INSTALL_PREFIX=../install ^
-                -DCMAKE_C_COMPILER=clang-cl ^
-                -DCMAKE_CXX_COMPILER=clang-cl ^
-                -Dlanguage=Python ^
-                $(Build.SourcesDirectory)
-        displayName: "Configure the MDI Library"
-        workingDirectory: $(Build.BinariesDirectory)
-
-      # Build
-      - script: |
-          call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
-          cmake --build . ^
-                --config %CMAKE_BUILD_TYPE% ^
-                -- -j %NUMBER_OF_PROCESSORS%
-        displayName: "Build the MDI Library"
-        workingDirectory: $(Build.BinariesDirectory)/build
-
-      # Install
-      - script: |
-          call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
-          cmake --build . ^
-                --config %CMAKE_BUILD_TYPE% ^
-                --target install ^
-                -- -j %NUMBER_OF_PROCESSORS%
-        displayName: "Install the MDI Library"
-        workingDirectory: $(Build.BinariesDirectory)/build
-        
-      - script: |
-          call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
-          ls
-          ls *
-          which python
-          python --version
-          cd MDI_Library
-          python mdi_mpi4py.py
-        displayName: "Test MPI4PY"
-        workingDirectory: $(Build.BinariesDirectory)/build

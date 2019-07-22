@@ -11,6 +11,8 @@ try:
 except ImportError:
     use_mpi4py = False
 
+print("Start of production code")
+
 natoms = 10
 
 # initialize MPI

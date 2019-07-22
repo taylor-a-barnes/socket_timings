@@ -12,6 +12,8 @@ try:
 except ImportError:
     use_mpi4py = False
 
+print("Start of driver code")
+
 niterations = 10000
 natoms = 10
 get_coords = False

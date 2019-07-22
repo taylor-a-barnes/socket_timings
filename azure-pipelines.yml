@@ -123,7 +123,7 @@ jobs:
           ls
           echo "Getting local hostname"
           hostname > my_hostname
-          set /p hostvar= < testh
+          set /p hostvar= < my_hostname
           echo "Local hostname is %hostvar%"
           pythonw.exe driver.py -mdi "-role DRIVER -name driver -method TCP -port 8021 -out dout"
           pythonw.exe production.py -mdi "-role ENGINE -name PONG -method TCP -hostname %hostvar% -port 8021 -out pout"
@@ -133,5 +133,5 @@ jobs:
           cat dout
           echo "============== pout"
           cat pout
-          timeout 5
+          sleep 5
         displayName: "Test the socket_timings code"

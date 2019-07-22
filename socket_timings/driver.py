@@ -14,8 +14,6 @@ except ImportError:
 
 print("Start of driver code")
 
-sys.exit()
-
 niterations = 10000
 natoms = 10
 get_coords = False
@@ -53,6 +51,8 @@ if world_rank == 0:
             mm_comm = comm
         else:
             raise ValueError('Production code name not recognized')
+
+sys.exit()
 
 
 if world_rank == 0:

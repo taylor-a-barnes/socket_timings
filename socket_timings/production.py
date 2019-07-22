@@ -13,8 +13,6 @@ except ImportError:
 
 print("Start of production code")
 
-sys.exit()
-
 natoms = 10
 
 # initialize MPI
@@ -33,6 +31,8 @@ else:
 
 # Accept a communicator to the driver code
 comm = mdi.MDI_Accept_Communicator()
+
+sys.exit()
 
 coords = [ 0.1*icoord for icoord in range(3*natoms) ]
 if use_numpy:

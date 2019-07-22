@@ -148,13 +148,15 @@ int tcp_request_connection(int port, char* hostname_ptr) {
   // if the connection is refused, try again
   //   this allows the production code to start before the driver
   int try_connect = 1;
+  printf("Trying to connect to the driver")
   while (try_connect == 1) {
 
     // loop over all addresses found in getaddrinfo
     for (addr = addrs; addr != NULL; addr = addr->ai_next) {
 
-    // open the socket
+      // open the socket
       sockfd = socket(addr->ai_family, addr->ai_socktype, addr->ai_protocol);
+      printf("Opened a socket: %d\n",sockfd)
       if (sockfd < 0) {
 	////
 	printf("tcp_request_connection sockfd: %d\n",sockfd);
@@ -163,7 +165,7 @@ int tcp_request_connection(int port, char* hostname_ptr) {
       }
 
       ret = connect(sockfd, addr->ai_addr, addr->ai_addrlen);
-      if (ret < 0 ) {
+      if (ret != 0 ) {
 #ifdef _WIN32
 	////
 	printf("C errors: %d\n",ret);
@@ -172,6 +174,9 @@ int tcp_request_connection(int port, char* hostname_ptr) {
 	printf("C errors3: %d %d %d %d\n",WSAECONNREFUSED,WSAEFAULT,WSAEINVAL,WSAEISCONN);
 	printf("C errors4: %d %d %d %d\n",WSAENETUNREACH,WSAEHOSTUNREACH,WSAENOBUFS,WSAENOTSOCK);
 	printf("C errors5: %d %d %d\n",WSAETIMEDOUT,WSAEWOULDBLOCK,WSAEACCES);
+	printf("Socket error: %d\n",SOCKET_ERROR);
+	int last_error = WSAGetLastError();
+	printf("LAST ERROR: %d\n",last_error);
 	////
         if ( errno == WSAECONNREFUSED ) {
           // close the socket, so that a new one can be created

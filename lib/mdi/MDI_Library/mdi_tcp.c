@@ -103,24 +103,16 @@ int tcp_request_connection(int port, char* hostname_ptr) {
   struct hostent* host_ptr;
 
   // get the address of the host
-  host_ptr = gethostbyname((char*) hostname_ptr);
-  if (host_ptr == NULL) {
-    mdi_error("Error in gethostbyname");
-  }
-  if (host_ptr->h_addrtype != AF_INET) {
-    mdi_error("Unkown address type");
-  }
-
-  bzero((char *) &driver_address, sizeof(driver_address));
-  driver_address.sin_family = AF_INET;
-  driver_address.sin_addr.s_addr = 
-    ((struct in_addr *)host_ptr->h_addr_list[0])->s_addr;
-  driver_address.sin_port = htons(port);
-
-  // create the socket
-  sockfd = socket(AF_INET, SOCK_STREAM, 0);
-  if (sockfd < 0) {
-    mdi_error("Could not create socket");
+  struct addrinfo hints = {};
+  struct addrinfo *addrs, *addr;
+  char port_str[16] = {};
+  sprintf(port_str, "%d", port);
+  hints.ai_family = AF_UNSPEC;
+  hints.ai_socktype = SOCK_STREAM;
+  hints.ai_protocol = IPPROTO_TCP;
+  ret = getaddrinfo(hostname_ptr, port_str, &hints, &addrs);
+  if (ret != 0) {
+    mdi_error("Error in getaddrinfo");
   }
 
   // connect to the driver
@@ -128,35 +120,39 @@ int tcp_request_connection(int port, char* hostname_ptr) {
   //   this allows the production code to start before the driver
   int try_connect = 1;
   while (try_connect == 1) {
-    ret = connect(sockfd, (const struct sockaddr *) &driver_address, sizeof(struct sockaddr));
-    if (ret < 0 ) {
+
+    // loop over all addresses found in getaddrinfo
+    for (addr = addrs; addr != NULL; addr = addr->ai_next) {
+
+    // open the socket
+      sockfd = socket(addr->ai_family, addr->ai_socktype, addr->ai_protocol);
+      if (sockfd < 0) {
+        mdi_error("Could not create socket");
+      }
+
+      ret = connect(sockfd, addr->ai_addr, addr->ai_addrlen);
+      if (ret < 0 ) {
 #ifdef _WIN32
-      if ( errno == WSAECONNREFUSED ) {
-	// close the socket, so that a new one can be created
-	ret = closesocket(sockfd);
+        if ( errno == WSAECONNREFUSED ) {
+          // close the socket, so that a new one can be created
+          ret = closesocket(sockfd);
 #else
-      if ( errno == ECONNREFUSED ) {
-	// close the socket, so that a new one can be created
-	ret = close(sockfd);
+        if ( errno == ECONNREFUSED ) {
+          // close the socket, so that a new one can be created
+	  ret = close(sockfd);
 #endif
-	if (ret != 0) {
-	  mdi_error("Could not close socket");
-	}
-
-	// create the socket
-	sockfd = socket(AF_INET, SOCK_STREAM, 0);
-	if (sockfd < 0) {
-	  mdi_error("Could not create socket");
-	}
+          if (ret != 0) {
+	    mdi_error("Could not close socket");
+          }
+        }
+        else { // only error out for errors other than "connection refused"
+          mdi_error("Could not connect to the driver");
+        }
 
       }
-      else { // only error out for errors other than "connection refused"
-	mdi_error("Could not connect to the driver");
+      else {
+        try_connect = 0;
       }
-
-    }
-    else {
-      try_connect = 0;
     }
   }
 

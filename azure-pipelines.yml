@@ -82,7 +82,7 @@ jobs:
           echo "Calling cmake"
           cmake -G Ninja ^
                 -DCMAKE_C_COMPILER=clang-cl ^
-                -DCMAKE_C_COMPILER=clang-cl ^
+                -DCMAKE_CXX_COMPILER=clang-cl ^
                 -Dlanguage=Python ^
                 -Dpython_package=ON ^
                 ../mdi

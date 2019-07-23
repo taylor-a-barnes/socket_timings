@@ -158,3 +158,27 @@ jobs:
           cat pout
           sleep 5
         displayName: "Test the socket_timings code"
+
+      # Test the socket_timings code with the package
+      - script: |
+          call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
+          echo "Contents of current directory:"
+          ls
+          echo "End of contents of current directory"
+          cd socket_timings
+          echo "Contents of current directory"
+          ls
+          echo "Getting local hostname"
+          hostname > my_hostname
+          set /p hostvar= < my_hostname
+          echo "Local hostname is %hostvar%"
+          START /B "" python driver.py -mdi "-role DRIVER -name driver -method TCP -port 8021"
+          python production.py -mdi "-role ENGINE -name PONG -method TCP -hostname %hostvar% -port 8021"
+          echo "============== ls"
+          ls
+          echo "============== dout"
+          cat dout
+          echo "============== pout"
+          cat pout
+          sleep 5
+        displayName: "Test the socket_timings code with the package"

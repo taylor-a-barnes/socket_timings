@@ -91,6 +91,26 @@ jobs:
           ls
           ls *
         displayName: "Building the MDI Library"
+
+      # Install the MDI Library
+      - script: | 
+          call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
+          ls
+          cd lib
+          echo "Contents of lib"
+          ls
+          cd mdi_build
+          echo "Contents of ../mdi"
+          ls ../mdi
+          echo "Calling cmake"
+          cmake --install . ^
+                --config %CMAKE_BUILD_TYPE%
+          ls
+          ls *
+	  cd ../../../
+	  echo "================= python -c"
+	  python -c "from mdi import MDI_Init"
+        displayName: "Installing the MDI Library"
         
       # Build the socket_timings code
       - script: |

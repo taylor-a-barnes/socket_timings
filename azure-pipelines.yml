@@ -80,7 +80,8 @@ jobs:
           echo "Contents of ../mdi"
           ls ../mdi
           echo "Calling cmake"
-          cmake -DCMAKE_C_COMPILER=clang-cl ^
+          cmake -G Ninja ^
+                -DCMAKE_C_COMPILER=clang-cl ^
                 -DCMAKE_C_COMPILER=clang-cl ^
                 -Dlanguage=Python ^
                 -Dpython_package=ON ^

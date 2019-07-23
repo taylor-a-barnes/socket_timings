@@ -80,7 +80,8 @@ jobs:
           echo "Contents of ../mdi"
           ls ../mdi
           echo "Calling cmake"
-          cmake -DCMAKE_C_COMPILER=clang-cl ^
+          cmake -G Ninja ^
+                -DCMAKE_C_COMPILER=clang-cl ^
                 -DCMAKE_CXX_COMPILER=clang-cl ^
                 -Dlanguage=Python ^
                 -Dpython_package=ON ^
@@ -121,8 +122,7 @@ jobs:
           cd build
           echo "Contents of upper directory"
           ls ../
-          cmake -G Ninja ^ 
-                -DCMAKE_C_COMPILER=clang-cl ^
+          cmake -DCMAKE_C_COMPILER=clang-cl ^
                 -DCMAKE_CXX_COMPILER=clang-cl ^
                 -Dlanguage=Python ^
                 ../socket_timings

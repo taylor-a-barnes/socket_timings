@@ -85,6 +85,7 @@ jobs:
                 -DCMAKE_C_COMPILER=clang-cl ^
                 -DCMAKE_CXX_COMPILER=clang-cl ^
                 -Dlanguage=Python ^
+                -Dpython_package=ON ^
                 ../mdi
           cmake --build . ^
                 --config %CMAKE_BUILD_TYPE%
@@ -103,13 +104,13 @@ jobs:
           echo "Contents of ../mdi"
           ls ../mdi
           echo "Calling cmake"
-          cmake --install . ^
-                --config %CMAKE_BUILD_TYPE%
+          cmake --build . ^
+                --target install
           ls
           ls *
-	  cd ../../../
-	  echo "================= python -c"
-	  python -c "from mdi import MDI_Init"
+          cd ../../../
+          echo "================= python -c"
+          python -c "from mdi import MDI_Init"
         displayName: "Installing the MDI Library"
         
       # Build the socket_timings code

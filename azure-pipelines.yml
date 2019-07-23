@@ -121,7 +121,8 @@ jobs:
           cd build
           echo "Contents of upper directory"
           ls ../
-          cmake -DCMAKE_C_COMPILER=clang-cl ^
+          cmake -G Ninja ^ 
+                -DCMAKE_C_COMPILER=clang-cl ^
                 -DCMAKE_CXX_COMPILER=clang-cl ^
                 -Dlanguage=Python ^
                 ../socket_timings

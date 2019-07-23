@@ -8,7 +8,7 @@ variables:
   llvm.version: '7.0.1' # Note: LLVM 8.0.0 fails to build the optimized libint
   mkl.version: '2019.1'
   conda.build: false
-  conda.build_type: Release
+  conda.build_type: Debug
 
 jobs:
 
@@ -69,6 +69,7 @@ jobs:
         displayName: "Install LLVM"
         
       # Build the MDI Library
+      #-DCMAKE_CXX_COMPILER=clang-cl ^
       - script: | 
           call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
           ls
@@ -81,9 +82,7 @@ jobs:
           ls ../mdi
           echo "Calling cmake"
           cmake -G Ninja ^
-                -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ^
                 -DCMAKE_C_COMPILER=clang-cl ^
-                -DCMAKE_CXX_COMPILER=clang-cl ^
                 -Dlanguage=Python ^
                 -Dpython_package=ON ^
                 ../mdi
